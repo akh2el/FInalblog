@@ -26,10 +26,12 @@
 <body>
 <div class="mr-container responsive">
 <!-- ************************* -->
-         
+
         <div class="text-center">
             <h1><strong>Thalani Khabar</strong></h1>
         </div>
+        <div class = "container" style = "width:90%;height:120px;background-color: rgb(51, 161, 161);">
+	  </div>
 <header class="date_social_link">
         <div class="row">
 

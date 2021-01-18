@@ -54,10 +54,10 @@
                     </ul>
                 </li>
 
-                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-sticky-note"></i><span class="hide-menu">Braking News</span></a>
+                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-sticky-note"></i><span class="hide-menu">Ads</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="poems.php">All Braking news</a></li>
-                        <li><a href="new-poems.php">Add Braking News</a></li>
+                        <li><a href="ads.php">All Ads</a></li>
+                        <li><a href="new-ads.php">Add Ads</a></li>
                     </ul>
                 </li>
                 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list-ul"></i><span class="hide-menu">Categories</span></a>
