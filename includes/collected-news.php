@@ -5,75 +5,91 @@
         <div class="row">
             <div class="col-md-3 order-md-2 mb-4">
                 <h5 class="">बिचार</h5>
-                <div class="row">
-                    <div class="col-md-7">
-                    <h6 class="" style = "width:90%; height:25px"><strong>मुखिय समचार</strong> </h6>
-                    <p class="" style = "width:95%; height:75px; overflow: hidden;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                    </div>
-                    <div class="col-md-5">
-                    <img class="" style="width:100%; height: 100px;" src="assets/images/diary.jpg" alt="News Images"></img>
-                    </div>
-                </div>  
-                <hr>  
+                
+                    <?php 
+			try {
+				// number of records to be displayed in a page ie. 3 in this section
+				$pages = new Paginator('1','p');
+				// select a table
+				$stmt = $db->query('SELECT postDate FROM sa_posts');
 
-                <div style=" height:400px;overflow:scroll;overflow-y:scroll;overflow-x:hidden;">
+				//pass number of records to
+				$pages->set_total($stmt->rowCount());
+                // sql query to fetch data from tabel
+				$stmt = $db->query('SELECT sa_posts.postID, sa_posts.postTitle, sa_posts.postSlug, sa_posts.postDesc, sa_posts.postDate, sa_posts.postTags, image 
+                                    FROM sa_posts INNER JOIN sa_post_section ON sa_posts.postID = sa_post_section.postID
+									INNER JOIN sa_section ON sa_post_section.secID = sa_section.secID 
+									WHERE sa_section.secTitle="Breaking News" ORDER BY sa_posts.postDate  DESC '.$pages->get_limit());
+                
+				while($row = $stmt->fetch()){
+
+                    echo '<div class="row">';
+                    echo '<div class="col-md-7">';
+                    echo '<p class="braking-news-title" style = " font-family: var(--semibold); height: 20px;"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';
+                    echo '<div class="braking-news-desc" style = "font-family: var(--semibold);" >';
+                        echo '<p style:">'.$row['postDesc'].'</p>';
+                    echo '</div>';
+                echo '</div>';
+                    echo '<div class="col-md-5">';
+                    echo '<a href=""><img class = "braking-news-img" src="admin/uploads/'.$row['image'].'"></a>';
+                    
+                echo '</div>';
+                
+                echo '</div>'; 
+                
+            }
+        } catch(PDOException $e) {
+            echo $e->getMessage();
+        }
+?>
+
+
+
+
+<div style=" height:400px;margin-top:20px;overflow:scroll;overflow-y:scroll;overflow-x:hidden;">
+                <?php 
+                    try {
+                        // number of records to be displayed in a page ie. 3 in this section
+                        $pages = new Paginator('4','p');
+                        // select a table
+                        $stmt = $db->query('SELECT postDate FROM sa_posts');
+
+                        //pass number of records to
+                        $pages->set_total($stmt->rowCount());
+                        // sql query to fetch data from tabel
+                        $stmt = $db->query('SELECT sa_posts.postID, sa_posts.postTitle, sa_posts.postSlug, sa_posts.postDesc, sa_posts.postDate, sa_posts.postTags, image 
+                                            FROM sa_posts INNER JOIN sa_post_section ON sa_posts.postID = sa_post_section.postID
+                                            INNER JOIN sa_section ON sa_post_section.secID = sa_section.secID 
+                                            WHERE sa_section.secTitle="विचार" ORDER BY sa_posts.postDate  DESC '.$pages->get_limit());
                         
-                        <div class ="row">
-                            <div class = "col-md-6">
-                                <p class="" style = " height:50px; overflow: hidden;"><strong>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</strong> </p>
-                            </div>
-                            <div class = "col-md-6">
-                                <img class="" style="width:auto; border-radius: 50%;height: 60px;" src="assets/images/diary.jpg" alt="News Images"></img>
-                            </div>
-                            <p class="" style = "margin-left:15px; height:70px;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                    
+                        while($row = $stmt->fetch()){
                             
-                        </div> 
-                        <hr>
-                        <div class ="row">
-                        <div class = "col-md-6">
-                                <p class="" style = " height:50px; overflow: hidden;"><strong>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</strong> </p>
-                            </div>
-                            <div class = "col-md-6">
-                                <img class="" style="width:auto; border-radius: 50%;height: 60px;" src="assets/images/diary.jpg" alt="News Images"></img>
-                            </div>
-                            <p class="" style = "margin-left:15px; height:70px;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                    
-                            
-                        </div> 
-                        <hr> 
-                        <div class ="row">
-                        <div class = "col-md-6">
-                                <p class="" style = " height:50px; overflow: hidden;"><strong>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</strong> </p>
-                            </div>
-                            <div class = "col-md-6">
-                                <img class="" style="width:auto; border-radius: 50%;height: 60px;" src="assets/images/diary.jpg" alt="News Images"></img>
-                            </div>
-                            <p class="" style = "margin-left:15px; height:70px;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                    
-                        </div>  
-                        <hr>
-                    
-                    
-                       
-                          
+                            echo '<div class ="row">'; 
+                                echo '<div class = "col-md-6">';
+                                    echo '<p class="" style = " height:50px; overflow: hidden;font-family: var(--semibold); height: 20px;"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';
+                                echo '</div>';
+                                echo '<div class = "col-md-6">';
+                                    echo '<a href=""><img class = "" style="width:auto; border-radius: 50%;height: 60px;"src="admin/uploads/'.$row['image'].'"></a>';
+                                echo '</div>';
+                                echo '<div class="" style = "font-family: var(--semibold);" >';
+                                    echo '<p style = "margin-left:15px; height:70px;">'.$row['postDesc'].'</p>';
+                                echo '</div>'; 
+                            echo '</div>' ;
+                                
+                            }
+                        } catch(PDOException $e) {
+                            echo $e->getMessage();
+                        }
+                        ?>                         
                 </div>
-                
-                        
                      
-                
+                <div style = "background-color: rgb(51, 161, 161); width: 95%;height: 450px; margin-top: 20px;">
+
+                        <h2 style="padding-top:60px">Advertisement<br>Section</h2>
+                    </div>
                 
                
-                <h3 class="text-center" style = "margin-top:20px;"><strong>मुखिय समचार</strong> </h3>
-                <ul>
-                    <li>lead ffffffffffffffffnews 1 <br> line2</li>
-                    <li>Lead news 2<br>line2</li>
-                    <li>Lead news 3<br>line2</li>
-                    <li>Lead news 4<br>line2</li>
-                    <li>Lead news 5<br>line2</li>
-                    <li>Lead news 6<br>line2</li>
-                    <li>Lead news 7<br>line2</li>
-                </ul>
+               
             </div>
 
             <div class="col-md-9 order-md-1">

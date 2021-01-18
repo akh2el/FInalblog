@@ -113,7 +113,7 @@
                       </li>
                       <li class="nav-item">
                       <?php
-                        $stmt = $db->query('SELECT catTitle, catSlug FROM sa_categories WHERE catTitle="samaj" ORDER BY catID DESC');
+                        $stmt = $db->query('SELECT catTitle, catSlug FROM sa_categories WHERE catTitle="विचार" ORDER BY catID DESC');
                         $row = $stmt->fetch();
                              echo '<a class="nav-link" href="catpost.php?id='.$row['catSlug'].'" class="categories">विचार</a>';
                          

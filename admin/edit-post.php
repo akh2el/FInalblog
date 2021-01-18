@@ -304,7 +304,7 @@ border-bottom: 0px !important;
          
                  if(isset($_POST['secID'])){
          
-                   if(in_array($row2['secID'], $_POST['secID'])){
+                   if(in_array($row3['secID'], $_POST['secID'])){
                       $checked="checked='checked'";
                    }else{
                       $checked = null;
