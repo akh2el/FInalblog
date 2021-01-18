@@ -1,0 +1,246 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+nav a{
+    color: white !important;
+}
+
+nav li{
+    padding-right: 35px;
+}
+.lang_trans{ /* English/nepali */
+    margin-right: 35px;
+}
+.date_social_link{ /* date and social link at top */
+    background-color: rgb(150, 135, 116);
+}
+
+
+/*************************************For Search Buttom***********************************************/
+
+.search-form{
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+    z-index: 1020;
+  }
+  /* Expandable search box */
+  /* Note: don't change 0.8s in transition. */
+  /* --------------------- */
+  input.search-text {
+    color: #222;
+    position:relative;
+    z-index:5;
+    transition: z-index 0.8s, width 0.5s, background 0.3s ease, border 0.3s;
+    height: 45px;
+    width: 0;
+    margin: 0;
+    padding: 5px 0 5px 40px;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 30px;
+    border: 1px solid transparent;
+  background: url(../images/khai.png) no-repeat left 9px center transparent;
+    background-size: 34px;
+  }
+  
+  input.search-text:focus {
+    z-index:3; 
+    width: 200px;
+    border: 1px solid #666;  
+    background-color: white;
+    outline: none;
+    cursor:auto;
+    padding-right: 10px;
+  }
+  
+  input.search-submit {
+    position: relative;
+    z-index: 4;
+    top:17px;
+    left: 49px;
+    width: 45px;
+    height: 45px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    border-radius: 30px;
+    cursor: pointer; 
+    background: none;
+  }
+  
+  input.search-text::-webkit-search-cancel-button {
+    cursor:pointer;
+  }
+
+  /* ******************* Breaking news *********** */
+  
+  .responsive {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+  }
+
+  .breaking-news{
+      height: 110px;
+  }
+  p {
+    margin-top: 0 ! important;
+    /* margin-bottom: 1rem; */
+}
+  .braking-news-img{
+      height: 100px;
+      width: 100px;
+      margin-top: 5px;
+  }
+  .braking-news-title{
+      margin-top: 5px;
+      overflow: hidden;
+      width: 95%;
+      height: 20px;
+      text-align: left;
+      font-family: 'Courier New', Courier, monospace;
+
+  }
+
+  .braking-news-desc{
+    overflow: hidden;
+    width: 95%;
+    text-align: left;
+    height: 90px;
+    margin-top: -25px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+
+  /* *******************Lead News section******* */
+
+  .leadNews{
+      height: 500px;
+      margin-top: 20px;
+  }
+  .lead-news-title-one{
+      margin-top: 13px;
+      width: auto;
+      overflow: hidden;
+      height: 20px;
+  }
+  .lead-news-desc-one{
+      width: 95%;
+      text-align: left;
+      height: 110px;
+      overflow: hidden;
+      margin-top: -10px;
+  }
+
+  .lead-news-title-two{
+    margin-top: 13px;
+    width: 95%;
+    height: 55px;
+    overflow: hidden;
+    height: 20px;
+}  
+  .lead-news-img{
+      height: 300px;
+      width: 380px;
+      align-self: center;
+  }
+  .lead-news-desc-two{
+    width: 100%;
+    text-align: left;
+    height: 110px;
+    overflow: hidden;
+}
+
+/* *****************मुखिय समचार************* */
+  
+.mukhya_samachar{
+    margin-left: 10px;
+}
+.mukhya_samachar_desc{
+    width: 90%;
+    height: 45px;
+    overflow: hidden;
+}
+a{
+    color: black !important;
+}
+
+
+
+.collected-News{
+    margin-bottom: 100px;
+}
+.collected-News-title{
+    width: 95%;
+    height: 55px;
+    overflow: hidden;
+    height: 20px;    
+}
+.collected-news-img{
+    width: 220px;
+    height: 130px;
+}
+.collected-News-desc{
+    width: 95%;
+    text-align: left;
+    height: 110px;
+    overflow: hidden;
+}
+
+
+/* *******************Anya nesws********** */
+.anya-news{
+    height: 300px;
+    margin-top:30px;
+    margin-bottom:30px   
+}
+.anya-news-title{
+    width: 95%;
+    height: 45px;
+    margin-bottom:30px;
+    }
+
+.anya-news-img{
+    height: 150px;
+    width: 220px;
+
+}
+
+.anya-news-desc{
+    width: 95%;
+    height: 80px;
+    overflow: hidden;
+}
+  
+
+
+
+.footer_logoimg{
+    width: 100px;
+    height: 150px;
+  }
+
+/* ****************category posts********* */
+
+.catpost-ima{
+ height: 120px;
+ width: 220px;
+}
+
+
+
+/* **********************anya-news************* */
+
+
+
+
+
