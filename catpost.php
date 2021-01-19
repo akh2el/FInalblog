@@ -16,103 +16,102 @@ if($row['catID'] == ''){
 ?>
 
     <div class="container responsive">
-		<div class="blog-listing row">
-						  
-				  <?php	
+		<div class ="row">
+			<div class="col-md-9">
+				<div class="blog-listing row">							
+					<?php	
+							try {
+
+								$pages = new Paginator('50','p');
+
+								$stmt = $db->prepare('SELECT sa_posts.postID FROM sa_posts, sa_post_categories WHERE sa_posts.postID = sa_post_categories.postID AND sa_post_categories.catID = :catID');
+								$stmt->execute(array(':catID' => $row['catID']));
+
+								//pass number of records to
+								$pages->set_total($stmt->rowCount());
+
+								$stmt = $db->prepare('
+									SELECT 
+										sa_posts.postID, sa_posts.postTitle, sa_posts.image, sa_posts.postSlug, sa_posts.postDesc, sa_posts.postDate , sa_posts.postTags
+									FROM 
+										sa_posts,
+										sa_post_categories
+									WHERE
+										sa_posts.postID = sa_post_categories.postID
+										AND sa_post_categories.catID = :catID
+									ORDER BY 
+										postID DESC
+									'.$pages->get_limit());
+
+								$stmt->execute(array(':catID' => $row['catID']));
+								while($row = $stmt->fetch()){
+						
+							echo '<div class="col-md-4 ">';
+								echo  '<div class="">';
+									echo '<h6 style="margin-top: 10px;width: 100%;height: 55px;text-align: justify; overflow: hidden;"><strong><a href="viewpost.php?id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></h6>';
+									echo  '<a href="viewpost.php?id='.$row['postSlug'].'"><img class="" style = "height: 120px; width: 100%;" src="admin/uploads/'.$row['image'].'" width="90%"></a>';
+									echo '</i><span></span> '.date('jS M Y', strtotime($row['postDate'])).'';
+								echo '</div>';
+								echo '<div class="" style="width: 100%;text-align: justify; height: 200px; overflow: hidden;">';
+									echo '<p>'.$row['postDesc'].'</p>';	
+								echo '</div>';
+								echo "<hr>";
+
+							echo '</div>';
+
+					}
+
+						echo $pages->page_links('c-'.$_GET['id'].'&');
+
+					} catch(PDOException $e) {
+						echo $e->getMessage();
+					}
+
+					?>
+				</div>
+			</div>	 
+
+
+			<!-- *******************Advertisement section******************* -->
+
+										<!-- start -->
+			<div class="col-md-3"style = "width:100%;margin-top:20px;">
+
+			
+			<?php 
 			try {
-
-				$pages = new Paginator('50','p');
-
-				$stmt = $db->prepare('SELECT sa_posts.postID FROM sa_posts, sa_post_categories WHERE sa_posts.postID = sa_post_categories.postID AND sa_post_categories.catID = :catID');
-				$stmt->execute(array(':catID' => $row['catID']));
+				// number of records to be displayed in a page ie. 3 in this section
+				$pages = new Paginator('4','p');
+				// select a table
+				$stmt = $db->query('SELECT postDate FROM sa_posts');
 
 				//pass number of records to
 				$pages->set_total($stmt->rowCount());
-
-				$stmt = $db->prepare('
-					SELECT 
-						sa_posts.postID, sa_posts.postTitle, sa_posts.image, sa_posts.postSlug, sa_posts.postDesc, sa_posts.postDate , sa_posts.postTags
-					FROM 
-						sa_posts,
-						sa_post_categories
-					WHERE
-						 sa_posts.postID = sa_post_categories.postID
-						 AND sa_post_categories.catID = :catID
-					ORDER BY 
-						postID DESC
-					'.$pages->get_limit());
-
-				$stmt->execute(array(':catID' => $row['catID']));
+                // sql query to fetch data from tabel
+				$stmt = $db->query('SELECT sa_ads.adsID, sa_ads.adsDate, image 
+                  FROM sa_ads INNER JOIN sa_ads_dis_ads ON sa_ads.adsID = sa_ads_dis_ads.adsID
+									INNER JOIN sa_dis_ads ON sa_ads_dis_ads.disID = sa_dis_ads.disID 
+									WHERE sa_dis_ads.disTitle="7Sidebar ads" ORDER BY sa_ads.adsDate  DESC '.$pages->get_limit());
+                
 				while($row = $stmt->fetch()){
-					
-					echo '<div class="col-md-3">';
-
-						
-						echo  '<div class="">';
-						echo '<h6 style="margin-top: 10px;width: 98%;height: 55px; overflow: hidden;"><strong><a href="viewpost.php?id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></h6>';
-						  echo  '<a href="viewpost.php?id='.$row['postSlug'].'"><img class="catpost-ima" src="admin/uploads/'.$row['image'].'" width="100%"></a>';
-						  echo '</i><span> On:</span> '.date('jS M Y', strtotime($row['postDate'])).'';
-                        
-                        /**********Tags***********/
-
-								// echo '<p>Tagged as: ';
-								// $links = array();
-								// $parts = explode(',', $row['postTags']);
-								// foreach ($parts as $tag)
-								// {
-								//     $links[] = "<a href='t-".$tag."'>".$tag."</a>";
-								// }
-								// echo implode(", ", $links);
-								// echo '</p>';
-
-                        echo '</div>';
-
-                        
-						
-						echo '<ul>';
-						
-						 
-						  
-						//   $stmt2 = $db->prepare('SELECT catTitle, catSlug FROM sa_categories, sa_post_categories WHERE sa_categories.catID = sa_post_categories.catID AND sa_post_categories.postID = :postID');
-						// 	$stmt2->execute(array(':postID' => $row['postID']));
-
-						// 	$catRow = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-
-						// 	$links = array();
-						// 	foreach ($catRow as $cat)
-						// 	{
-						// 		$links[] = "<a href='c-".$cat['catSlug']."'>".$cat['catTitle']."</a>";
-						// 	}
-						  
-						//    echo '<li class="fafa"><i class="fa fa-folder-open"></i><span> Category: </span>'.implode(", ", $links).'</li>';
-						   
-						   
-					   echo '</ul>';
-
-					   echo '<div class="" style="width: 95%; height: 200px; overflow: hidden;">';
-						echo '<p>'.$row['postDesc'].'</p>';	
-						echo '</div>';
-
-						echo '</div>';
-
+					echo '<div style = "margin-top:20px;">';
+		  echo '<a href=""><img class = "" style = "width:100%; height:220px" src="admin/uploads/'.$row['image'].'"></a>';
+		  echo '</div>';
+					}
+				} catch(PDOException $e) {
+					echo $e->getMessage();
 				}
+		?>
 
-				echo $pages->page_links('c-'.$_GET['id'].'&');
 
-			} catch(PDOException $e) {
-			    echo $e->getMessage();
-			}
+			</div>
+		</div>
+		
+		
 
-			?>
-
-			
-			   
-			      
-			  
-
-         </div>
-         <!--end of row-->     
-      </div>
+										<!-- end -->
+		   
+    </div>
       <!--end of all container-->
 
 

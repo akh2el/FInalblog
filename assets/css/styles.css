@@ -15,7 +15,7 @@ nav li{
     margin-right: 35px;
 }
 .date_social_link{ /* date and social link at top */
-    background-color: rgb(150, 135, 116);
+    background-color: rgb(2, 123, 236);
 }
 
 
@@ -233,7 +233,7 @@ a{
 
 .catpost-ima{
  height: 120px;
- width: 220px;
+ width: 100%;
 }
 
 

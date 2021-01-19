@@ -30,8 +30,42 @@
         <div class="text-center">
             <h1><strong>Thalani Khabar</strong></h1>
         </div>
-        <div class = "container" style = "width:90%;height:120px;background-color: rgb(51, 161, 161);">
-	  </div>
+
+                <!-- Advertisement section -->
+
+                              <!-- Start -->
+
+        <div class = "container" style = "width:90%;height:120px;">
+        <?php 
+			try {
+				// number of records to be displayed in a page ie. 3 in this section
+				$pages = new Paginator('1','p');
+				// select a table
+				$stmt = $db->query('SELECT postDate FROM sa_posts');
+
+				//pass number of records to
+				$pages->set_total($stmt->rowCount());
+                // sql query to fetch data from tabel
+				$stmt = $db->query('SELECT sa_ads.adsID, sa_ads.adsDate, image 
+                  FROM sa_ads INNER JOIN sa_ads_dis_ads ON sa_ads.adsID = sa_ads_dis_ads.adsID
+									INNER JOIN sa_dis_ads ON sa_ads_dis_ads.disID = sa_dis_ads.disID 
+									WHERE sa_dis_ads.disTitle="1Below Title" ORDER BY sa_ads.adsDate  DESC '.$pages->get_limit());
+                
+				while($row = $stmt->fetch()){
+		
+          echo '<a href=""><img class = "" style = "width:100%; height:120px" src="admin/uploads/'.$row['image'].'"></a>';
+					}
+				} catch(PDOException $e) {
+					echo $e->getMessage();
+				}
+		?>
+        </div>
+                            <!-- end -->
+
+
+
+
+
 <header class="date_social_link">
         <div class="row">
 
