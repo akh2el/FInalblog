@@ -2,7 +2,7 @@
 
     
 <!-- *************************	Advertisement section   ************************ -->
-<div class = "container" style = "width:90%;height:120px;margin-top:20px;">
+<div class = "container" style = "width:90%;height:120px;margin-top:20px; margin-bottom: 20px;">
 
 <?php 
 			try {
@@ -14,14 +14,14 @@
 				//pass number of records to
 				$pages->set_total($stmt->rowCount());
                 // sql query to fetch data from tabel
-				$stmt = $db->query('SELECT sa_ads.adsID, sa_ads.adsDate, image 
+				$stmt = $db->query('SELECT sa_ads.adsID, sa_ads.adsDate,sa_ads.adsURL, image 
                   FROM sa_ads INNER JOIN sa_ads_dis_ads ON sa_ads.adsID = sa_ads_dis_ads.adsID
 									INNER JOIN sa_dis_ads ON sa_ads_dis_ads.disID = sa_dis_ads.disID 
 									WHERE sa_dis_ads.disTitle="6Above Footer" ORDER BY sa_ads.adsDate  DESC '.$pages->get_limit());
                 
 				while($row = $stmt->fetch()){
 		
-          echo '<a href=""><img class = "" style = "width:100%; height:120px" src="admin/uploads/'.$row['image'].'"></a>';
+          echo '<a href="'.$row['adsURL'].'" target="_blank"><img class = "" style = "width:100%; height:120px" src="admin/uploads/'.$row['image'].'"></a>';
 					}
 				} catch(PDOException $e) {
 					echo $e->getMessage();
@@ -109,16 +109,16 @@
 			</div>
 		<!-- Page Links-->
 			<div class="col-md-3 text-white text-center">
-				<img class="footer_logoimg" src="images1/logo.png" alt="Thalani Khabar logo"> <!-- Thalani Logo -->
-				<ul>
-					<li><a class="" href="#">समाज</a></li>
-					<li><a class="" href="#">राजनीति</a></li>
-					<li><a class="" href="#">अर्थ</a></li>
-					<li><a class="" href="#">अनौठो संसार</a></li>
-					<li><a class="" href="#">खेलकुद</a></li>
-					<li><a class="" href="#">मनोरञ्जन</a></li>
-					<li><a class="" href="#">क्राइम</a></li>
-					<li><a class="" href="#">विचार</a></li>
+				<img class="footer_logoimg" src="assets/images/logo1.jpg" alt="Thalani Khabar logo"> <!-- Thalani Logo -->
+				<ul >
+					<li><a class="" style = "color: white !important;" href="#">समाज</a></li>
+					<li><a class="" style = "color: white !important;" href="#">राजनीति</a></li>
+					<li><a class="" style = "color: white !important;" href="#">अर्थ</a></li>
+					<li><a class="" style = "color: white !important;" href="#">अनौठो संसार</a></li>
+					<li><a class="" style = "color: white !important;" href="#">खेलकुद</a></li>
+					<li><a class="" style = "color: white !important;" href="#">मनोरञ्जन</a></li>
+					<li><a class="" style = "color: white !important;" href="#">क्राइम</a></li>
+					<li><a class="" style = "color: white !important;" href="#">विचार</a></li>
 				</ul> 
 			</div>
         </div>  

@@ -30,7 +30,7 @@ if($row['postID'] == ''){
                           }
                   
                           echo '<div class="fafaone"><span> Category: </span>'.implode(", ", $links).'</div>';
-                          echo  '<a href="'.$row['postSlug'].'"><img class="" style="width: 100%; height: 500px;" src="admin/uploads/'.$row['image'].'" width="100%"></a>';
+                          echo  '<img class="" style="width: 100%; height: 500px;" src="admin/uploads/'.$row['image'].'" width="100%">';
                           echo '<strong> Date:</span> '.date('jS M Y', strtotime($row['postDate'])).'</span></strong>';
                           echo'<div class="blog-content"';
                             echo ' < p style="width: 100%; text-align: justify; overflow: hidden;">'.$row['postCont'].'</p>';
@@ -100,14 +100,14 @@ if($row['postID'] == ''){
                           //pass number of records to
                           $pages->set_total($stmt2->rowCount());
                                   // sql query to fetch data from tabel
-                          $stmt2 = $db->query('SELECT sa_ads.adsID, sa_ads.adsDate, image 
+                          $stmt2 = $db->query('SELECT sa_ads.adsID, sa_ads.adsDate,sa_ads.adsURL, image 
                                     FROM sa_ads INNER JOIN sa_ads_dis_ads ON sa_ads.adsID = sa_ads_dis_ads.adsID
                                     INNER JOIN sa_dis_ads ON sa_ads_dis_ads.disID = sa_dis_ads.disID 
                                     WHERE sa_dis_ads.disTitle="7Sidebar ads" ORDER BY sa_ads.adsDate  DESC '.$pages->get_limit());
                                   
                           while($row2 = $stmt2->fetch()){
                             echo '<div style = "margin-top:20px;">';
-                            echo '<a href=""><img class = "" style = "width:100%; height:220px" src="admin/uploads/'.$row2['image'].'"></a>';
+                            echo '<a href="'.$row2['adsURL'].'" target="_blank"><img class = "" style = "width:100%; height:220px" src="admin/uploads/'.$row2['image'].'"></a>';
                             echo '</div>';
                             }
                           } catch(PDOException $e) {

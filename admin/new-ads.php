@@ -98,8 +98,8 @@ border-bottom: 0px !important;
                             $error[] = 'Please enter the title.';
                         }
 
-                        // if($adsDesc ==''){
-                        //     $error[] = 'Please enter the description.';
+                        // if($adsURL ==''){
+                        //     $adsURL = 'www.thalanikhabar.com';
                         // }
 
                         // if($postCont ==''){
@@ -124,7 +124,7 @@ border-bottom: 0px !important;
                                  $imageFileType=pathinfo($target_file,PATHINFO_EXTENSION);
 
 
-                                $allowed=array('jpeg','png' ,'jpg'); $filename=$_FILES['image']['name']; 
+                                $allowed=array('jpeg','png' ,'jpg','gif'); $filename=$_FILES['image']['name']; 
 
                                 $ext=pathinfo($filename, PATHINFO_EXTENSION); if(!in_array($ext,$allowed) ) 
 
@@ -143,10 +143,11 @@ border-bottom: 0px !important;
                                 try {
                                 
                                 //insert into database
-                                $stmt = $db->prepare('INSERT INTO sa_ads (adsTitle,adsDate, image) VALUES (:adsTitle,:postDate, :image)') ;
+                                $stmt = $db->prepare('INSERT INTO sa_ads (adsTitle,adsDate,adsURL, image) VALUES (:adsTitle,:postDate,:adsURL, :image)') ;
                                 $stmt->execute(array(
                                     ':adsTitle' => $adsTitle,
                                     ':postDate' => date('Y-m-d H:i:s'),
+                                    ':adsURL' => $adsURL,
                                     ':image' => $image
                                 ));
                                 $adsID = $db->lastInsertId();
@@ -218,6 +219,12 @@ border-bottom: 0px !important;
                             <div class="col-md-12">
                                  <h4 class="card-title">Name</h4>
                                 <input type="text" placeholder="Enter Ads Title" class="form-control form-control-line" name='adsTitle' value='<?php if(isset($error)){ echo $_POST['adsTitle'];}?>'>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                 <h4 class="card-title">URL</h4>
+                                <input type="text" placeholder="Enter Ads URL" class="form-control form-control-line" name='adsURL' value='<?php if(isset($error)){ echo $_POST['adsURL'];}?>'>
                             </div>
                         </div>
                         

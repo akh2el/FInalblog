@@ -18,11 +18,11 @@
 									INNER JOIN sa_section ON sa_post_section.secID = sa_section.secID 
 									WHERE sa_section.secTitle="Sub Lead News" ORDER BY sa_posts.postDate  DESC '.$pages->get_limit());
                     while($row = $stmt->fetch()){
-                    echo '<p class="lead-news-title-one"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';   
+                    echo '<p class="lead-news-title-one" style="height: 48px;"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';   
                     echo'<div class="">';
                     echo'</div>';
                     echo'<div class="">';
-                        echo '<div class="lead-news-desc-one" style = "text-align: justify;">';
+                        echo '<div class="lead-news-desc-one" style = "text-align: justify; ">';
                                     echo '<p >'.$row['postDesc'].'</p>';
                         echo '</div>';
                     echo '</div>';
@@ -60,10 +60,12 @@
 
             echo'<div class="col-md-6 text-center ">';
                 echo '<p class="lead-news-title-two" style = "text-align: justify;"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';   
-                echo '<a href=""><img class=" responsive" style = "width:90%"src="admin/uploads/'.$row['image'].'"></a>';
+                echo '<a href="viewpost.php? id='.$row['postSlug'].'"><img class=" responsive" style = "width:100%"src="admin/uploads/'.$row['image'].'"></a>';
                 echo '<div class="lead-news-desc-two"style = "text-align: justify;">';
                     echo '<p style:">'.$row['postDesc'].'</p>';
+                    
                 echo '</div>';
+                echo '<hr>';
             echo ' </div>';
             
         
@@ -76,12 +78,12 @@ echo $e->getMessage();
 ?>
 
 
-<div class="col-md-3" style = "background-color: #1e90FF;">
+<div class="col-md-3" style = "background-color: #090052; margin-bottom: 18px;">
         <h4 class="text-center" style = "margin-top:20px; color: white;"><strong>मुखिय समचार</strong> </h4>
 
           <?php 
 			try {
-				$pages = new Paginator('7','p');
+				$pages = new Paginator('8','p');
 
 				$stmt = $db->query('SELECT postDate FROM sa_posts');
 
@@ -123,14 +125,14 @@ echo $e->getMessage();
 				//pass number of records to
 				$pages->set_total($stmt->rowCount());
                 // sql query to fetch data from tabel
-				$stmt = $db->query('SELECT sa_ads.adsID, sa_ads.adsDate, image 
+				$stmt = $db->query('SELECT sa_ads.adsID, sa_ads.adsDate,sa_ads.adsURL, image 
                   FROM sa_ads INNER JOIN sa_ads_dis_ads ON sa_ads.adsID = sa_ads_dis_ads.adsID
 									INNER JOIN sa_dis_ads ON sa_ads_dis_ads.disID = sa_dis_ads.disID 
 									WHERE sa_dis_ads.disTitle="3Below Lead News" ORDER BY sa_ads.adsDate  DESC '.$pages->get_limit());
                 
 				while($row = $stmt->fetch()){
 		
-          echo '<a href=""><img class = "" style = "width:100%; height:120px" src="admin/uploads/'.$row['image'].'"></a>';
+          echo '<a href="'.$row['adsURL'].'" target="_blank"><img class = "" style = "width:100%; height:120px" src="admin/uploads/'.$row['image'].'"></a>';
 					}
 				} catch(PDOException $e) {
 					echo $e->getMessage();

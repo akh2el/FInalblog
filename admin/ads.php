@@ -6,16 +6,16 @@ require_once('../includes/config.php');
 if(!$user->is_logged_in()){ header('Location: login.php'); }
 
 //show message from add / edit page
-if(isset($_GET['delpost'])){ 
+if(isset($_GET['delads'])){ 
 
 	$stmt = $db->prepare('DELETE FROM sa_ads WHERE adsID = :adsID') ;
-	$stmt->execute(array(':adsID' => $_GET['delpost']));
+	$stmt->execute(array(':adsID' => $_GET['delads']));
 
 	//delete post categories. 
 	$stmt = $db->prepare('DELETE FROM sa_ads_dis_ads WHERE adsID = :adsID');
-	$stmt->execute(array(':adsID' => $_GET['delpost']));
+	$stmt->execute(array(':adsID' => $_GET['delads']));
 
-	header('Location: index.php?action=deleted');
+	header('Location: ads.php?action=deleted');
 	exit;
 } 
 
@@ -37,11 +37,11 @@ if(isset($_GET['delpost'])){
      <!-- Style Sheet -->
 
 <script language="JavaScript" type="text/javascript">
-  function delpost(id, title)
+  function delads(id, title)
   {
 	  if (confirm("Are you sure you want to delete '" + title + "'"))
 	  {
-	  	window.location.href = 'index.php?delpost=' + id;
+	  	window.location.href = 'ads.php?delads=' + id;
 	  }
   }
   </script>
@@ -136,7 +136,7 @@ if(isset($_GET['delpost'])){
                                             echo '</td>';
                                           echo '<td>'.date('jS M Y', strtotime($row['adsDate'])).'</td>';
                                           ?>
-                                                <td><a href="edit-ads.php?id=<?php echo $row['adsID'];?>"><button type="button" class="btn btn-primary btn-xs btn-addon s-b-10 s-l-5"><i class="fa fa-edit"></i> Edit</button></a> | <a href="javascript:delpost('<?php echo $row['adsID'];?>','<?php echo $row['adsTitle'];?>')"><button type="button" class="btn btn-danger btn-xs btn-addon s-b-10 s-l-5"><i class="fa fa-trash"></i> Delete</button></a></td>
+                                                <td><a href="edit-ads.php?id=<?php echo $row['adsID'];?>"><button type="button" class="btn btn-primary btn-xs btn-addon s-b-10 s-l-5"><i class="fa fa-edit"></i> Edit</button></a> | <a href="javascript:delads('<?php echo $row['adsID'];?>','<?php echo $row['adsTitle'];?>')"><button type="button" class="btn btn-danger btn-xs btn-addon s-b-10 s-l-5"><i class="fa fa-trash"></i> Delete</button></a></td>
                                             
                                             <?php 
 												echo '</tr>';

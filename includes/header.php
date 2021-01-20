@@ -38,7 +38,7 @@
         <div class = "container" style = "width:90%;height:120px;">
         <?php 
 			try {
-				// number of records to be displayed in a page ie. 3 in this section
+				// number of records to be displayed in a page ie. 1 in this section
 				$pages = new Paginator('1','p');
 				// select a table
 				$stmt = $db->query('SELECT postDate FROM sa_posts');
@@ -46,14 +46,15 @@
 				//pass number of records to
 				$pages->set_total($stmt->rowCount());
                 // sql query to fetch data from tabel
-				$stmt = $db->query('SELECT sa_ads.adsID, sa_ads.adsDate, image 
+				$stmt = $db->query('SELECT sa_ads.adsID, sa_ads.adsDate,sa_ads.adsURL, image 
                   FROM sa_ads INNER JOIN sa_ads_dis_ads ON sa_ads.adsID = sa_ads_dis_ads.adsID
 									INNER JOIN sa_dis_ads ON sa_ads_dis_ads.disID = sa_dis_ads.disID 
-									WHERE sa_dis_ads.disTitle="1Below Title" ORDER BY sa_ads.adsDate  DESC '.$pages->get_limit());
+									WHERE sa_dis_ads.disTitle="1Below Title" ORDER BY sa_ads.adsID  DESC '.$pages->get_limit());
                 
 				while($row = $stmt->fetch()){
 		
-          echo '<a href=""><img class = "" style = "width:100%; height:120px" src="admin/uploads/'.$row['image'].'"></a>';
+          echo '<a href="'.$row['adsURL'].'" target="_blank"><img class = "" style = "width:100%; height:100px; margin-bottom:5px;" src="admin/uploads/'.$row['image'].'"></a>';
+          
 					}
 				} catch(PDOException $e) {
 					echo $e->getMessage();
@@ -66,12 +67,12 @@
 
 
 
-<header class="date_social_link">
+<header class="date_social_link" style = "background-color: #090052;">
         <div class="row">
 
             <div class="col-md-4"></div>
 
-            <div class=" col-md-4 text-center">
+            <div class=" col-md-4 text-center" style = "margin-top:8px; color: white;">
 
                 <h6><span id="datetime"></span></h6>
                 <script>
@@ -81,10 +82,10 @@
 
             </div>
             <div class=" col-md-4 text-right">
-                <a class="logo" href="#"><i class="fa fa-facebook-square" style="font-size:36px;color:#39569c"></i></a>
-                <a class="logo" href="#"><i class="fa fa-linkedin-square" style="font-size:36px;color:#2867B2"></i></a>
-                <a class="logo" href="#"><i class="fa fa-twitter-square" style="font-size:36px;color:#1DA1F2"></i></a>
-                <a class="logo" href="#"><i class="fa fa-pinterest-square" style="font-size:36px;color:#E60023"></i></a> 
+                <a class="logo" href="https://www.facebook.com/thalanikhabar" target="_blank"><i class="fa fa-facebook-square" style="font-size:36px;color:#fff"></i></a>
+                <a class="logo" href="#"><i class="fa fa-linkedin-square" style="font-size:36px;color:#fff"></i></a>
+                <a class="logo" href="#"><i class="fa fa-twitter-square" style="font-size:36px;color:#fff"></i></a>
+                <a class="logo" href="#"><i class="fa fa-pinterest-square" style="font-size:36px;color:#fff"></i></a> 
             </div>
         </div> 
     </header>

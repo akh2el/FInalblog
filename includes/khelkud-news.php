@@ -14,14 +14,14 @@
 				//pass number of records to
 				$pages->set_total($stmt->rowCount());
                 // sql query to fetch data from tabel
-				$stmt = $db->query('SELECT sa_ads.adsID, sa_ads.adsDate, image 
+				$stmt = $db->query('SELECT sa_ads.adsID, sa_ads.adsDate,sa_ads.adsURL, image 
                   FROM sa_ads INNER JOIN sa_ads_dis_ads ON sa_ads.adsID = sa_ads_dis_ads.adsID
 									INNER JOIN sa_dis_ads ON sa_ads_dis_ads.disID = sa_dis_ads.disID 
 									WHERE sa_dis_ads.disTitle="5Below Anya News" ORDER BY sa_ads.adsDate  DESC '.$pages->get_limit());
                 
 				while($row = $stmt->fetch()){
 		
-          echo '<a href=""><img class = "" style = "width:100%; height:120px" src="admin/uploads/'.$row['image'].'"></a>';
+          echo '<a href="'.$row['adsURL'].'" target="_blank"><img class = "" style = "width:100%; height:120px" src="admin/uploads/'.$row['image'].'"></a>';
 					}
 				} catch(PDOException $e) {
 					echo $e->getMessage();
@@ -51,10 +51,10 @@
             while($row = $stmt->fetch()){
                 echo '<div class="row" style = "margin-top: 25px;">';
                     echo '<div class="col-md-4" >';
-                        echo '<a href=""><img style:" width=110px; height=100px; margin-top:10px; margin-bottom:10px" src="admin/uploads/'.$row['image'].'"></a>';
+                        echo '<img style:" width=110px; height=100px; margin-top:10px; margin-bottom:10px" src="admin/uploads/'.$row['image'].'">';
                     echo '</div>';
                     echo '<div class="col-md-8 text-left">';
-                        echo '<p style="height: 95px; overflow: hidden; width : 85%; text-align: justify;"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';			
+                        echo '<p style="height: 73px; overflow: hidden; width : 100%; text-align: justify;"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';			
                     echo '</div>'; 
                 echo '</div>';
             }
@@ -83,10 +83,10 @@
             while($row = $stmt2->fetch()){
                 echo '<div class="row" style = "margin-top: 25px;">';
                 echo '<div class="col-md-4" >';
-                    echo '<a href=""><img style:" width=110px; height=100px; margin-top:10px; margin-bottom:10px" src="admin/uploads/'.$row['image'].'"></a>';
+                    echo '<img style:" width=110px; height=100px; margin-top:10px; margin-bottom:10px" src="admin/uploads/'.$row['image'].'">';
                 echo '</div>';
                 echo '<div class="col-md-8 text-left">';
-                    echo '<p style="height: 95px; overflow: hidden; width : 85%; text-align: justify;"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';			
+                    echo '<p style="height: 73px; overflow: hidden; width : 100%; text-align: justify;"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';			
                 echo '</div>'; 
             echo '</div>';
             }
@@ -109,13 +109,14 @@
         FROM sa_posts INNER JOIN sa_post_section ON sa_posts.postID = sa_post_section.postID
         INNER JOIN sa_section ON sa_post_section.secID = sa_section.secID 
         WHERE sa_section.secTitle="पढ्नै  पर्ने" ORDER BY sa_posts.postDate  DESC '.$pages->get_limit());
+        
         while($row = $stmt3->fetch()){
             echo '<div class="row" style = "margin-top: 25px;">';
             echo '<div class="col-md-4" >';
-                echo '<a href=""><img style=" width: 110px; height: 100px; margin-top:10px; margin-bottom:10px; text-align: justify;" src="admin/uploads/'.$row['image'].'"></a>';
+                echo '<img style=" width: 110px; height: 100px; text-align: justify;" src="admin/uploads/'.$row['image'].'">';
             echo '</div>';
             echo '<div class="col-md-8 text-left">';
-                echo '<p style="height: 95px; overflow: hidden; width : 85%;"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';			
+                echo '<p style="height: 73px; overflow: hidden; width : 100%;text-align: justify;"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';			
             echo '</div>'; 
         echo '</div>';
         }

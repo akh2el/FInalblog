@@ -3,6 +3,18 @@
     padding: 0;
 }
 
+@font-face {
+    font-family: nepalipreety;
+    src: url(preeti.TTF);
+  }
+@font-face {
+    font-family: nepalihimali;
+    src: url(himali_0.ttf);
+  }
+
+
+
+
 
 nav a{
     color: white !important;

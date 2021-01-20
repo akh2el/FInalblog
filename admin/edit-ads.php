@@ -119,7 +119,7 @@ border-bottom: 0px !important;
                                  $imageFileType=pathinfo($target_file,PATHINFO_EXTENSION);
 
 
-                                $allowed=array('jpeg','png' ,'jpg'); $filename=$_FILES['image']['name']; 
+                                $allowed=array('jpeg','png' ,'jpg','gif'); $filename=$_FILES['image']['name']; 
 
                                 $ext=pathinfo($filename, PATHINFO_EXTENSION); if(!in_array($ext,$allowed) ) 
 
@@ -134,10 +134,11 @@ border-bottom: 0px !important;
                                 move_uploaded_file( $_FILES['image'] ['tmp_name'], $path);
 
                                 //insert into database
-                                $stmt = $db->prepare('UPDATE sa_ads SET adsTitle = :adsTitle, image = :image WHERE adsID = :adsID') ;
+                                $stmt = $db->prepare('UPDATE sa_ads SET adsTitle = :adsTitle,adsURL = :adsURL, image = :image WHERE adsID = :adsID') ;
                                 $stmt->execute(array(
                                     ':adsTitle' => $adsTitle,
                                     ':adsID' => $adsID,
+                                    ':adsURL' => $adsURL,
                                     ':image' => $image
                                 ));
 
@@ -211,6 +212,12 @@ border-bottom: 0px !important;
                             <div class="col-md-12">
                                 <h4 class="card-title">Name</h4>
                                 <input type="text" placeholder="Enter ads title" class="form-control form-control-line" name='adsTitle' value='<?php echo $row['adsTitle'];?>'>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h4 class="card-title">URL</h4>
+                                <input type="text" placeholder="Enter ads URL" class="form-control form-control-line" name='adsURL' value='<?php echo $row['adsURL'];?>'>
                             </div>
                         </div>
                         

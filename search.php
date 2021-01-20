@@ -25,7 +25,7 @@ $search =$_POST['search'];
         
      }
  }else{
-     echo "o record";
+     echo '<img class = "center"style = ""src="assets/images/no_result.gif" alt="zero result found">';
  }
 ?>
 
