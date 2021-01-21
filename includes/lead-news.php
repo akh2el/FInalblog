@@ -18,11 +18,11 @@
 									INNER JOIN sa_section ON sa_post_section.secID = sa_section.secID 
 									WHERE sa_section.secTitle="Sub Lead News" ORDER BY sa_posts.postDate  DESC '.$pages->get_limit());
                     while($row = $stmt->fetch()){
-                    echo '<p class="lead-news-title-one" style="height: 48px;"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';   
+                    echo '<p class="lead-news-title-one"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';   
                     echo'<div class="">';
                     echo'</div>';
                     echo'<div class="">';
-                        echo '<div class="lead-news-desc-one" style = "text-align: justify; ">';
+                        echo '<div class="lead-news-desc-one">';
                                     echo '<p >'.$row['postDesc'].'</p>';
                         echo '</div>';
                     echo '</div>';
@@ -59,9 +59,9 @@
 
 
             echo'<div class="col-md-6 text-center ">';
-                echo '<p class="lead-news-title-two" style = "text-align: justify;"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';   
-                echo '<a href="viewpost.php? id='.$row['postSlug'].'"><img class=" responsive" style = "width:100%"src="admin/uploads/'.$row['image'].'"></a>';
-                echo '<div class="lead-news-desc-two"style = "text-align: justify;">';
+                echo '<p class="lead-news-title-two"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';   
+                echo '<a href="viewpost.php? id='.$row['postSlug'].'"><img class=" lead-news-img responsive" src="admin/uploads/'.$row['image'].'"></a>';
+                echo '<div class="lead-news-desc-two">';
                     echo '<p style:">'.$row['postDesc'].'</p>';
                     
                 echo '</div>';
@@ -78,8 +78,8 @@ echo $e->getMessage();
 ?>
 
 
-<div class="col-md-3" style = "background-color: #090052; margin-bottom: 18px;">
-        <h4 class="text-center" style = "margin-top:20px; color: white;"><strong>मुखिय समचार</strong> </h4>
+<div class="col-md-3 mukhya_samachar">
+        <h4 class="text-center mukhya_header"><strong>मुखिय समचार</strong> </h4>
 
           <?php 
 			try {
@@ -97,8 +97,8 @@ echo $e->getMessage();
                 
                 while($row = $stmt->fetch()){
         
-               echo '<ul class = "mukhya_samachar" style="color: white;">'; 
-                    echo '<li style = "text-align: justify;"> <p class="mukhya_samachar_desc" ><strong><a style="color: white !important;" href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p></li>';   
+               echo '<ul >'; 
+                    echo '<li> <p class="mukhya_samachar_desc" ><strong><a style="color: white !important;" href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p></li>';   
                     
                 echo'</ul>';
            // echo'</div>';
@@ -113,7 +113,7 @@ echo $e->getMessage();
 </div>
 
 <!-- *************************	Advertisement section   ************************ -->
-<div class = "" style = "width:100%;height:120px;margin-top:20px;background-color: rgb(51, 161, 161);">
+<div class = "ads">
 
 <?php 
 			try {
@@ -132,7 +132,7 @@ echo $e->getMessage();
                 
 				while($row = $stmt->fetch()){
 		
-          echo '<a href="'.$row['adsURL'].'" target="_blank"><img class = "" style = "width:100%; height:120px" src="admin/uploads/'.$row['image'].'"></a>';
+          echo '<a href="'.$row['adsURL'].'" target="_blank"><img class = "ads_img" src="admin/uploads/'.$row['image'].'"></a>';
 					}
 				} catch(PDOException $e) {
 					echo $e->getMessage();

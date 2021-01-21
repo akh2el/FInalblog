@@ -2,7 +2,7 @@
 
 
 <!-- *************************	Advertisement section   ************************ -->
-<div class = "" style = "width:100%;height:120px;margin-top:20px;margin-bottom:20px;background-color: rgb(51, 161, 161);">
+<div class = "ads">
 
 <?php 
 			try {
@@ -21,15 +21,16 @@
                 
 				while($row = $stmt->fetch()){
 		
-          echo '<a href="'.$row['adsURL'].'" target="_blank"><img class = "" style = "width:100%; height:120px" src="admin/uploads/'.$row['image'].'"></a>';
+          echo '<a href="'.$row['adsURL'].'" target="_blank"><img class = "ads_img" src="admin/uploads/'.$row['image'].'"></a>';
 					}
 				} catch(PDOException $e) {
 					echo $e->getMessage();
 				}
 		?>
 
-	  </div>
-        <div class="row">
+      </div>
+      
+        <div class="row romanchak_news">
        
 
         <div class="col-md-4  border-right">
@@ -49,12 +50,12 @@
 									WHERE sa_section.secTitle="Romanchak News" ORDER BY sa_posts.postDate  DESC '.$pages->get_limit());
             
             while($row = $stmt->fetch()){
-                echo '<div class="row" style = "margin-top: 25px;">';
+                echo '<div class="row ">';
                     echo '<div class="col-md-4" >';
-                        echo '<img style:" width=110px; height=100px; margin-top:10px; margin-bottom:10px" src="admin/uploads/'.$row['image'].'">';
+                        echo '<img class = "romanchak_img" src="admin/uploads/'.$row['image'].'">';
                     echo '</div>';
-                    echo '<div class="col-md-8 text-left">';
-                        echo '<p style="height: 73px; overflow: hidden; width : 100%; text-align: justify;"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';			
+                    echo '<div class="col-md-8 text-left romanchak_t">';
+                        echo '<p class = "romanchak_title"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';			
                     echo '</div>'; 
                 echo '</div>';
             }
@@ -81,12 +82,12 @@
             $stmt2 = $db->query('SELECT postID, postTitle, postSlug, postDesc, postDate, postTags, image FROM sa_posts ORDER BY postDate DESC '.$pages->get_limit());
                             
             while($row = $stmt2->fetch()){
-                echo '<div class="row" style = "margin-top: 25px;">';
+                echo '<div class="row ">';
                 echo '<div class="col-md-4" >';
-                    echo '<img style:" width=110px; height=100px; margin-top:10px; margin-bottom:10px" src="admin/uploads/'.$row['image'].'">';
+                    echo '<img class = "romanchak_img" src="admin/uploads/'.$row['image'].'">';
                 echo '</div>';
-                echo '<div class="col-md-8 text-left">';
-                    echo '<p style="height: 73px; overflow: hidden; width : 100%; text-align: justify;"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';			
+                echo '<div class="col-md-8 text-left romanchak_t">';
+                    echo '<p class = "romanchak_title"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';			
                 echo '</div>'; 
             echo '</div>';
             }
@@ -111,12 +112,12 @@
         WHERE sa_section.secTitle="पढ्नै  पर्ने" ORDER BY sa_posts.postDate  DESC '.$pages->get_limit());
         
         while($row = $stmt3->fetch()){
-            echo '<div class="row" style = "margin-top: 25px;">';
+            echo '<div class="row">';
             echo '<div class="col-md-4" >';
-                echo '<img style=" width: 110px; height: 100px; text-align: justify;" src="admin/uploads/'.$row['image'].'">';
+                echo '<img class = "romanchak_img" src="admin/uploads/'.$row['image'].'">';
             echo '</div>';
-            echo '<div class="col-md-8 text-left">';
-                echo '<p style="height: 73px; overflow: hidden; width : 100%;text-align: justify;"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';			
+            echo '<div class="col-md-8 text-left romanchak_t">';
+                echo '<p class = "romanchak_title"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';			
             echo '</div>'; 
         echo '</div>';
         }

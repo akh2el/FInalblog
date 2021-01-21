@@ -88,10 +88,10 @@ if($row['catID'] == ''){
 				//pass number of records to
 				$pages->set_total($stmt->rowCount());
                 // sql query to fetch data from tabel
-				$stmt = $db->query('SELECT sa_ads.adsID, sa_ads.adsDate,sa_ads.adsURL image 
+				$stmt = $db->query('SELECT sa_ads.adsID, sa_ads.adsDate, sa_ads.adsURL, image 
                   FROM sa_ads INNER JOIN sa_ads_dis_ads ON sa_ads.adsID = sa_ads_dis_ads.adsID
 									INNER JOIN sa_dis_ads ON sa_ads_dis_ads.disID = sa_dis_ads.disID 
-									WHERE sa_dis_ads.disTitle="7Sidebar ads" ORDER BY sa_ads.adsDate  DESC '.$pages->get_limit());
+									WHERE sa_dis_ads.disTitle="7Sidebar ads" ORDER BY sa_ads.adsID  DESC '.$pages->get_limit());
                 
 				while($row = $stmt->fetch()){
 					echo '<div style = "margin-top:20px;">';

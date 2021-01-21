@@ -2,7 +2,7 @@
 
     
 <!-- *************************	Advertisement section   ************************ -->
-<div class = "container" style = "width:90%;height:120px;margin-top:20px; margin-bottom: 20px;">
+<div class = "container ads" style = "margin-bottom:20px">
 
 <?php 
 			try {
@@ -21,7 +21,7 @@
                 
 				while($row = $stmt->fetch()){
 		
-          echo '<a href="'.$row['adsURL'].'" target="_blank"><img class = "" style = "width:100%; height:120px" src="admin/uploads/'.$row['image'].'"></a>';
+          echo '<a href="'.$row['adsURL'].'" target="_blank"><img class = "ads_img"  src="admin/uploads/'.$row['image'].'"></a>';
 					}
 				} catch(PDOException $e) {
 					echo $e->getMessage();
@@ -31,7 +31,7 @@
 	  </div>
 
 <footer>
-	<div class="mr-container" style="background-color:black;padding-top:30px;">
+	<div class="mr-container footer1">
     	<div class="row ">
             <div class="col-md-3">
                  <div class="text-white  f1"> <!-- f1 class is for padding top and left : 30px and 60px  -->
@@ -90,35 +90,80 @@
 				
 	<!-- facebook page implementation -->
 
-            <div class="col-md-6   text-center">
+	<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v9.0" nonce="5CJAKDWz"></script>
+
+	<div class="col-md-6   text-center">
 		<!-- Facebook page start -->
-				<div class="fb"id="fb-root ">
-					<div class="fb-page" data-href="https://www.facebook.com/thalanikhabar/" 
-						data-tabs="" data-width="400" data-height="270" data-small-header="false" 
-						data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-						<blockquote cite="https://www.facebook.com/thalanikhabar/" class="fb-xfbml-parse-ignore">
-						<a href="https://www.facebook.com/thalanikhabar/">Thalani Khabar</a></blockquote>
-					</div>
-				</div>
+		<div class="fb-page" data-href="https://www.facebook.com/thalanikhabar" data-tabs="" data-width="400" data-height="270" data-small-header="false" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="false">
+		<blockquote cite="https://www.facebook.com/thalanikhabar" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/thalanikhabar">Thalani Khabar</a></blockquote>
+	</div>
 		<!-- facebook page end -->
+
 
 		<!-- about us section -->
 				<div class="fb"> <!-- fb class is for padding-top: 40px-->
-					<p class="text-center"> काठमाडौँ, १९ वैशाख </p>     
+					     
                 </div>
 			</div>
 		<!-- Page Links-->
 			<div class="col-md-3 text-white text-center">
-				<img class="footer_logoimg" src="assets/images/logo1.jpg" alt="Thalani Khabar logo"> <!-- Thalani Logo -->
+				<img class="footer_logoimg" src="assets/images/logo.png" alt="Thalani Khabar logo"> <!-- Thalani Logo -->
 				<ul >
-					<li><a class="" style = "color: white !important;" href="#">समाज</a></li>
-					<li><a class="" style = "color: white !important;" href="#">राजनीति</a></li>
-					<li><a class="" style = "color: white !important;" href="#">अर्थ</a></li>
-					<li><a class="" style = "color: white !important;" href="#">अनौठो संसार</a></li>
-					<li><a class="" style = "color: white !important;" href="#">खेलकुद</a></li>
-					<li><a class="" style = "color: white !important;" href="#">मनोरञ्जन</a></li>
-					<li><a class="" style = "color: white !important;" href="#">क्राइम</a></li>
-					<li><a class="" style = "color: white !important;" href="#">विचार</a></li>
+					<li>
+					<?php
+                        $stmt = $db->query('SELECT catTitle, catSlug FROM sa_categories WHERE catTitle="समाज" ORDER BY catID DESC');
+                        $row = $stmt->fetch();
+                             echo '<a class="nav-link" href="catpost.php?id='.$row['catSlug'].'" class="categories">समाज</a>';    
+                        ?>
+					</li>
+					<li><a class="" href="#">राजनीति</a></li>
+					<li>
+					<?php
+                        $stmt = $db->query('SELECT catTitle, catSlug FROM sa_categories WHERE catTitle="अर्थ / व्यापार" ORDER BY catID DESC');
+                        $row = $stmt->fetch();
+                             echo '<a class="nav-link" href="catpost.php?id='.$row['catSlug'].'" class="categories">अर्थ / व्यापार</a>';
+                         
+                        ?>
+					</li>
+					<li>
+					<?php
+                        $stmt = $db->query('SELECT catTitle, catSlug FROM sa_categories WHERE catTitle="अनौठो संसार" ORDER BY catID DESC');
+                        $row = $stmt->fetch();
+                             echo '<a class="nav-link" href="catpost.php?id='.$row['catSlug'].'" class="categories">अनौठो संसार</a>';
+                         
+                        ?>
+					</li>
+					<li>
+					<?php
+                        $stmt = $db->query('SELECT catTitle, catSlug FROM sa_categories WHERE catTitle="खेलकुद" ORDER BY catID DESC');
+                        $row = $stmt->fetch();
+                             echo '<a class="nav-link" href="catpost.php?id='.$row['catSlug'].'" class="categories">खेलकुद</a>';
+                         
+                        ?>
+					</li>
+					<li>
+					<?php
+                        $stmt = $db->query('SELECT catTitle, catSlug FROM sa_categories WHERE catTitle="मनोरञ्जन" ORDER BY catID DESC');
+                        $row = $stmt->fetch();
+                             echo '<a class="nav-link" href="catpost.php?id='.$row['catSlug'].'" class="categories">मनोरञ्जन</a>';
+                         
+                        ?>
+					</li>
+					<li> <?php
+                        $stmt = $db->query('SELECT catTitle, catSlug FROM sa_categories WHERE catTitle="क्राइम" ORDER BY catID DESC');
+                        $row = $stmt->fetch();
+                             echo '<a class="nav-link" href="catpost.php?id='.$row['catSlug'].'" class="categories">क्राइम</a>';
+                         
+                        ?></li>
+					<li>
+					<?php
+                        $stmt = $db->query('SELECT catTitle, catSlug FROM sa_categories WHERE catTitle="विचार" ORDER BY catID DESC');
+                        $row = $stmt->fetch();
+                             echo '<a class="nav-link" href="catpost.php?id='.$row['catSlug'].'" class="categories">विचार</a>';
+                         
+                        ?>
+					</li>
 				</ul> 
 			</div>
         </div>  

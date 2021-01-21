@@ -25,7 +25,9 @@ $search =$_POST['search'];
         
      }
  }else{
-     echo '<img class = "center"style = ""src="assets/images/no_result.gif" alt="zero result found">';
+     echo '<div class = "container text center">';
+     echo '<img class = "text-center"style = ""src="assets/images/no_result.gif" alt="zero result found">';
+     echo'</div';
  }
 ?>
 

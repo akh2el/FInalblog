@@ -23,10 +23,10 @@
                 
 				while($row = $stmt->fetch()){
 
-                    echo '<div class="row"style = "background-color: rgb(240, 236, 240);">';
+                    echo '<div class="row bichar">';
                     echo '<div class="col-md-7">';
-                    echo '<p class="braking-news-title" style = " font-family: var(--semibold);text-align: justify; height: 20px;"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';
-                    echo '<div class="braking-news-desc" style = "font-family: var(--semibold);text-align: justify;font-size: 13.5px;" >';
+                    echo '<p class="braking-news-title"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';
+                    echo '<div class="braking-news-desc"  >';
                         echo '<p>'.$row['postDesc'].'</p>';
                     echo '</div>';
                 echo '</div>';
@@ -46,7 +46,7 @@
 
 
 
-            <div class = "border-left" style=" height:400px;margin-top:20px;overflow:scroll;overflow-y:scroll;overflow-x:hidden;">
+            <div class = "border-left bichar_scroll">
             
                 <?php 
                     try {
@@ -65,15 +65,15 @@
                         
                         while($row = $stmt->fetch()){
                             
-                            echo '<div class ="row" style = "margin-left: 5px; margin-right: 10px;" >'; 
-                                echo '<div class = "col-md-6" style="margin-top: 15px;">';
-                                    echo '<p class="" style = " height:45px;width:110%; font-size: 15px; text-align: justify; overflow: hidden;"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';
+                            echo '<div class ="row bichar_margin">'; 
+                                echo '<div class = "col-md-6 bichar_col">';
+                                    echo '<p class="bichar_title"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';
                                 echo '</div>';
-                                echo '<div class = "col-md-6 text-right"style = "margin-right:-20px; margin-top:10px;">';
-                                    echo '<img class = "" style="width:60px; height: 60px; border-radius: 50%;"src="admin/uploads/'.$row['image'].'">';
+                                echo '<div class = "col-md-6 text-right bichar_col2">';
+                                    echo '<img class = "bichar_img" src="admin/uploads/'.$row['image'].'">';
                                 echo '</div>';
                                 
-                                echo '<div class="" style = "width: 100%;font-size: 14px; height: 100px;text-align: justify; padding-left: 5px; overflow: hidden;" >'; // display description
+                                echo '<div class="bichar_desc" >'; // display description
                                 echo '<p >'.$row['postDesc'].'</p>';
                                 echo '</div>';
                                 
@@ -92,7 +92,7 @@
                     <!-- **************************************Ads section*************** -->
 
 
-                <div style = " width: 100%;height: 500px; margin-top: 20px;">
+                <div class = "sidebar_ads">
 
                 <?php 
 			try {
@@ -111,7 +111,7 @@
                 
 				while($row = $stmt->fetch()){
 		  echo '<div style = "margin-top:20px"'; 
-          echo '<a href="'.$row['adsURL'].'" target="_blank"><img class = "" style = "width:100%; height:220px" src="admin/uploads/'.$row['image'].'"></a>';
+          echo '<a href="'.$row['adsURL'].'" target="_blank"><img class = "sidebar_ads_img" src="admin/uploads/'.$row['image'].'"></a>';
           echo "</div>";
 					}
 				} catch(PDOException $e) {
@@ -131,7 +131,7 @@
 
             <div class="col-md-9 order-md-1">
                 <?php 
-                    echo'<div class="row collected-news" style="margin-bottom: 30px; margin-top:30px">';
+                    echo'<div class="row collected-news">';
                 
                 
                         try {
@@ -147,11 +147,11 @@
                             while($row = $stmt->fetch()){
                     
 
-                        echo'<div class="col-md-4 "style="margin-bottom: 20px; margin-top:20px">';
+                        echo'<div class="col-md-4 collected_margin">';
 
                        
 
-                            echo '<p class="collected-News-title "style = "width:100%; height:48px" ><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';
+                            echo '<p class="collected-News-title " ><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';
                             
                             $stmt2 = $db->prepare('SELECT catTitle, catSlug FROM sa_categories, sa_post_categories WHERE sa_categories.catID = sa_post_categories.catID AND sa_post_categories.postID = :postID');
                             $stmt2->execute(array(':postID' => $row['postID']));
@@ -165,11 +165,11 @@
                             }
             
                             echo '</i><span></span> '.date('jS/M ', strtotime($row['postDate'])).'';
-                            echo '<a href="viewpost.php? id='.$row['postSlug'].'"><img class="" style = "width:100%; height:170px" src="admin/uploads/'.$row['image'].'"></a>';
-                            echo '<p class="" style = "overflow: hidden; width: 55%; height: 20px; text-align: justify; font-size:14px;">'.implode(", ", $links).'</p>';
+                            echo '<a href="viewpost.php? id='.$row['postSlug'].'"><img class="collected-news-img"  src="admin/uploads/'.$row['image'].'"></a>';
+                            echo '<p class="collecterd_news_cat">'.implode(", ", $links).'</p>';
                           
-                            echo '<div class="collected-News-desc" style="text-align: justify;" >';
-                                echo '<p style:">'.$row['postDesc'].'</p>';
+                            echo '<div class="collected-News-desc"  >';
+                                echo '<p>'.$row['postDesc'].'</p>';
                                 
                             echo '</div>';
                             
@@ -207,18 +207,18 @@
     
                         while($row = $stmt->fetch()){
                 
-                        echo '<div class="col-md-6" style="margin-bottom: 30px; margin-top:30px">';
+                        echo '<div class="col-md-6 collected_news_samaj">';
                         
-                            echo '<p style = "height:48px; overflow: hidden; margin-right:5px; text-align: justify;"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';
+                            echo '<p class = "collected_news_samaj_title"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>';
                         
-                            echo '<div class="" style="height: 172px; overflow: hidden; margin-top: -25px; margin-bottom: 15px; text-align: justify;">';
-                                echo '<p style:">'.$row['postDesc'].'</p>';
+                            echo '<div class="collected_news_samaj_desc">';
+                                echo '<p>'.$row['postDesc'].'</p>';
                              echo '</div>';
                         echo'</div>';
     
-                        echo'<div class="col-md-6" style="margin-bottom: 30px; margin-top:30px">'; 
+                        echo'<div class="col-md-6 collected_news_samaj_img_col" >'; 
                         
-                            echo '<a href="viewpost.php? id='.$row['postSlug'].'"><img classs="text-center" style:" width=100%; height=220px;" src="admin/uploads/'.$row['image'].'"></a>';
+                            echo '<a href="viewpost.php? id='.$row['postSlug'].'"><img classs="text-center " style:" width=100%; height=220px;" src="admin/uploads/'.$row['image'].'"></a>';
                         
                         echo'</div>';
 

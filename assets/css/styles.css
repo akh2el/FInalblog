@@ -30,6 +30,22 @@ nav li{
     background-color: rgb(2, 123, 236);
 }
 
+/* *****************************ADS***************** */
+.ads{
+    width:100%;
+    height:100px;
+    margin-top:20px;  
+}
+.ads_img{
+    width: 100%;
+    height:100px
+}
+
+.sidebar_ads_img{
+    width:100%; 
+    height:220px   
+}
+
 
 /*************************************For Search Buttom***********************************************/
 
@@ -110,16 +126,18 @@ nav li{
 }
   .braking-news-img{
       height: 100px;
-      width: 100px;
+      width: 100%;
       margin-top: 5px;
   }
   .braking-news-title{
       margin-top: 5px;
       overflow: hidden;
       width: 95%;
-      height: 20px;
+      height: 22px;
       text-align: left;
-      font-family: 'Courier New', Courier, monospace;
+      text-align: justify;
+      font-family: var(--semibold); 
+      
 
   }
 
@@ -127,8 +145,9 @@ nav li{
     overflow: hidden;
     width: 95%;
     text-align: left;
-    height: 90px;
+    height: 83px;
     margin-top: -25px;
+    text-align: justify;  
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
 
@@ -143,7 +162,7 @@ nav li{
       margin-top: 13px;
       width: auto;
       overflow: hidden;
-      height: 20px;
+      height: 48px;
   }
   .lead-news-desc-one{
       width: 95%;
@@ -151,6 +170,7 @@ nav li{
       height: 110px;
       overflow: hidden;
       margin-top: -10px;
+      text-align: justify;
   }
 
   .lead-news-title-two{
@@ -159,80 +179,243 @@ nav li{
     height: 55px;
     overflow: hidden;
     height: 20px;
+    text-align: justify;
 }  
   .lead-news-img{
-      height: 300px;
-      width: 380px;
+      height: 410px;
+      width: 100%x;
       align-self: center;
   }
   .lead-news-desc-two{
     width: 100%;
     text-align: left;
     height: 110px;
+    text-align: justify;
     overflow: hidden;
 }
 
 /* *****************मुखिय समचार************* */
   
 .mukhya_samachar{
-    margin-left: 10px;
+    /* margin-left: 10px; */
+    background-color: #090052; 
+    margin-bottom: 18px;
 }
+.mukhya_header{
+    margin-top:20px; 
+    color: white;
+}
+
 .mukhya_samachar_desc{
     width: 90%;
-    height: 45px;
+    height: 48px;
     overflow: hidden;
+    text-align: justify;
+    color: white;
+    
 }
+
+.mukhya_samachar ul{
+    color:white;
+}
+.mukhya_samachar ul li{
+    margin-left: 10px;
+}
+
 a{
     color: black !important;
+}
+
+/* ******************Collected news*********** */
+
+.bichar{
+    background-color: rgb(240, 236, 240);   
+    padding-bottom: 5px;
+}
+
+.bichar_scroll{
+    height:400px;
+    margin-top:20px;
+    overflow:scroll;
+    overflow-y:scroll;
+    overflow-x:hidden;
+}
+.bichar_margin{
+    margin-left: 5px; 
+    margin-right: 10px;
+}
+.bichar_col{
+    margin-top: 15px;
+}
+.bichar_title{
+    height:45px;
+    width:110%; 
+    font-size: 15px; 
+    text-align: justify; 
+    overflow: hidden;
+}
+.bichar_col2{
+    margin-right:-20px; 
+    margin-top:10px;
+}
+.bichar_img{
+    width:60px; 
+    height: 60px; 
+    border-radius: 50%;
+}
+.bichar_desc{
+    width: 100%;
+    font-size: 14px; 
+    height: 100px;
+    text-align: justify;
+    padding-left: 5px; 
+    overflow: hidden;
+}
+.sidebar_ads{
+    width: 100%;
+    height: 500px; 
+    margin-top: 20px;
 }
 
 
 
 .collected-News{
-    margin-bottom: 100px;
+    margin-bottom: 30px; 
+    margin-top:30px
 }
+
+.collected_margin{
+    margin-bottom: 20px; 
+    margin-top:20px
+}
+
 .collected-News-title{
-    width: 95%;
-    height: 55px;
+    width:100%; 
+    height:48px;
     overflow: hidden;
     height: 20px;    
 }
 .collected-news-img{
-    width: 220px;
-    height: 130px;
+    width:100%; 
+    height:170px
+}
+.collecterd_news_cat{
+    overflow: hidden;
+     width: 55%; 
+     height: 20px; 
+     text-align: justify; 
+     font-size:14px;
 }
 .collected-News-desc{
     width: 95%;
     text-align: left;
     height: 110px;
     overflow: hidden;
+    text-align: justify;
+}
+
+.collected_news_samaj{
+    margin-bottom: 30px; 
+    margin-top:30px
+}
+.collected_news_samaj_title{
+    height:48px; 
+    overflow: hidden; 
+    margin-right:5px; 
+    text-align: justify;
+}
+.collected_news_samaj_desc{
+    height: 172px; 
+    overflow: hidden; 
+    margin-top: -25px; 
+    margin-bottom: 15px; 
+    text-align: justify;
+}
+.collected_news_samaj_img_col{
+    margin-bottom: 30px; 
+    margin-top:30px;
+    
 }
 
 
 /* *******************Anya nesws********** */
-.anya-news{
-    height: 300px;
-    margin-top:30px;
-    margin-bottom:30px   
+
+.anya-news_header{
+    margin-top: 20px;
 }
+
+.anya_news{
+    margin-top:10px  
+}
+
 .anya-news-title{
-    width: 95%;
-    height: 45px;
-    margin-bottom:30px;
-    }
+    text-align: justify; 
+    height:48px;
+    overflow: hidden;
+}
 
 .anya-news-img{
-    height: 150px;
-    width: 220px;
-
+    width: 100%; 
+    height:170px;
 }
 
 .anya-news-desc{
-    width: 95%;
-    height: 80px;
+    width: 100%; 
+    height: 85px;
+    text-align: justify; 
     overflow: hidden;
 }
   
+/* ****************************Khelkhood********************* */
+
+.romanchak_news{
+    margin-top: 25px;
+}
+.romanchak_img{
+    width: 100%; 
+    height:100px; 
+    margin-top:10px; 
+    margin-bottom:10px  
+}
+.romanchak_title{
+    height: 73px; 
+    overflow: hidden; 
+    width : 100%; 
+    text-align: justify;   
+    
+}
+.romanchak_t{
+    margin-top: 20px;
+}
+
+/* **********************************Footer************ */
+
+
+.footer1{
+    background: rgba(0,0,0,0.8);
+    padding-top:30px; 
+}
+
+footer ul{
+    list-style-type: none;
+
+   columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+}
+ footer ul li a{
+    color: white !important;
+ }
+
+
+
+
+
+
+
+
+
+
 
 
 

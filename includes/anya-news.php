@@ -5,7 +5,7 @@
 <div class="container responsive" >
     
 <!-- *************************	Advertisement section   ************************ -->
-<div class = "" style = "width:100%;height:120px;margin-top:20px; margin-bottom:20px;background-color: rgb(51, 161, 161);">
+<div class = "ads">
 
 <?php 
 			try {
@@ -20,11 +20,11 @@
 				$stmt = $db->query('SELECT sa_ads.adsID, sa_ads.adsDate,sa_ads.adsURL, image 
                   FROM sa_ads INNER JOIN sa_ads_dis_ads ON sa_ads.adsID = sa_ads_dis_ads.adsID
 									INNER JOIN sa_dis_ads ON sa_ads_dis_ads.disID = sa_dis_ads.disID 
-									WHERE sa_dis_ads.disTitle="4Above Anya news" ORDER BY sa_ads.adsDate  DESC '.$pages->get_limit());
+									WHERE sa_dis_ads.disTitle="4Above Anya news" ORDER BY sa_ads.adsID  DESC '.$pages->get_limit());
                 
 				while($row = $stmt->fetch()){
 		
-          echo '<a href="'.$row['adsURL'].'" target="_blank"><img class = "" style = "width:100%; height:120px" src="admin/uploads/'.$row['image'].'"></a>';
+          echo '<a href="'.$row['adsURL'].'" target="_blank"><img class = "ads_img" src="admin/uploads/'.$row['image'].'"></a>';
 					}
 				} catch(PDOException $e) {
 					echo $e->getMessage();
@@ -32,8 +32,8 @@
 		?>
 
 	  </div>
-<h5 class=""><strong>अन्य </strong> </h5>
-    <div class="row " style = "margin-top:10px">
+<h5 class="anya-news_header"><strong>अन्य </strong> </h5>
+    <div class="row anya_news" >
     <?php 
 			try {
                 // number of records to be displayed in a page ie. 4 in this section
@@ -52,9 +52,9 @@
                 while($row = $stmt->fetch()){
 
                     echo'<div class="col-md-3">';
-                        echo '<h6 class=""style = "text-align: justify; height:56px;overflow: hidden;"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></h6>'; // display title 
-                        echo '<a href="viewpost.php? id='.$row['postSlug'].'"><img class="" style = " width: 100%; height:170px;" src="admin/uploads/'.$row['image'].'"></a>';	// display image			
-                        echo '<div class="anya-news-desc" style = "width: 95%; height: 85px;text-align: justify; overflow: hidden;" >'; // display description
+                        echo '<p class="anya-news-title"><strong><a href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p>'; // display title 
+                        echo '<a href="viewpost.php? id='.$row['postSlug'].'"><img class="anya-news-img" src="admin/uploads/'.$row['image'].'"></a>';	// display image			
+                        echo '<div class="anya-news-desc" >'; // display description
                         echo '<p >'.$row['postDesc'].'</p>';
                         echo '</div>';
                     echo '</div>';  
