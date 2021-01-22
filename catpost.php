@@ -48,11 +48,11 @@ if($row['catID'] == ''){
 						
 							echo '<div class="col-md-4 ">';
 								echo  '<div class="">';
-									echo '<h6 style="margin-top: 10px;width: 100%;height: 55px;text-align: justify; overflow: hidden;"><strong><a href="viewpost.php?id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></h6>';
-									echo  '<a href="viewpost.php?id='.$row['postSlug'].'"><img class="" style = "height: 120px; width: 100%;" src="admin/uploads/'.$row['image'].'" width="90%"></a>';
+									echo '<h6 class = "catpost_title"><strong><a href="viewpost.php?id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></h6>';
+									echo  '<a href="viewpost.php?id='.$row['postSlug'].'"><img class="catpost_img" src="admin/uploads/'.$row['image'].'" width="90%"></a>';
 									echo '</i><span></span> '.date('jS M Y', strtotime($row['postDate'])).'';
 								echo '</div>';
-								echo '<div class="" style="width: 100%;text-align: justify; height: 200px; overflow: hidden;">';
+								echo '<div class="catpost_desc">';
 									echo '<p>'.$row['postDesc'].'</p>';	
 								echo '</div>';
 								echo "<hr>";
@@ -75,13 +75,13 @@ if($row['catID'] == ''){
 			<!-- *******************Advertisement section******************* -->
 
 										<!-- start -->
-			<div class="col-md-3"style = "width:100%;margin-top:20px;">
+			<div class="col-md-3">
 
 			
 			<?php 
 			try {
 				// number of records to be displayed in a page ie. 3 in this section
-				$pages = new Paginator('4','p');
+				$pages = new Paginator('10','p');
 				// select a table
 				$stmt = $db->query('SELECT postDate FROM sa_posts');
 
@@ -95,7 +95,7 @@ if($row['catID'] == ''){
                 
 				while($row = $stmt->fetch()){
 					echo '<div style = "margin-top:20px;">';
-		  echo '<a href="'.$row['adsURL'].'" target="_blank"><img class = "" style = "width:100%; height:220px" src="admin/uploads/'.$row['image'].'"></a>';
+		  echo '<a href="'.$row['adsURL'].'" target="_blank"><img class = "sidebar_ads_img" src="admin/uploads/'.$row['image'].'"></a>';
 		  echo '</div>';
 					}
 				} catch(PDOException $e) {

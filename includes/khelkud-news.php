@@ -34,7 +34,7 @@
        
 
         <div class="col-md-4  border-right">
-        <h5 class="text-center"><strong>रोमान्चक  ख़बर </strong> </h5>
+        <h5 class="text-center" style = "background-color: yellow; padding: 3px;"><strong>रोमान्चक  ख़बर </strong> </h5>
         <?php
         try {
             $pages = new Paginator('3','p');
@@ -70,7 +70,7 @@
 
 
         <div class="col-md-4 border-right">
-        <h5 class="text-center"><strong>आजको ख़बर </strong> </h5>
+        <h5 class="text-center" style = "background-color: green; padding: 3px;"><strong>आजको ख़बर </strong> </h5>
         <?php
         try {
             $pages = new Paginator('3','p');
@@ -97,7 +97,7 @@
         ?>
         </div>
         <div class="col-md-4">
-        <h5 class="text-center"><strong>पढ्नै  पर्ने </strong> </h5>
+        <h5 class="text-center"  style = "background-color: red; padding: 3px;" ><strong>पढ्नै  पर्ने </strong> </h5>
         <?php
         try {
             $pages = new Paginator('3','p');

@@ -98,7 +98,7 @@ echo $e->getMessage();
                 while($row = $stmt->fetch()){
         
                echo '<ul >'; 
-                    echo '<li> <p class="mukhya_samachar_desc" ><strong><a style="color: white !important;" href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p></li>';   
+                    echo '<li> <p class="mukhya_samachar_desc" ><strong><a style="color: white !important; text-decoration: none;" href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p></li>';   
                     
                 echo'</ul>';
            // echo'</div>';

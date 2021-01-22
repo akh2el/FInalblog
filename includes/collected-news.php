@@ -164,9 +164,9 @@
                                 $links[] = "<a href='catpost.php?id=".$cat['catSlug']."'>".$cat['catTitle']."</a>";
                             }
             
-                            echo '</i><span></span> '.date('jS/M ', strtotime($row['postDate'])).'';
+                            echo ' '.date('jS/M ', strtotime($row['postDate'])).'';
                             echo '<a href="viewpost.php? id='.$row['postSlug'].'"><img class="collected-news-img"  src="admin/uploads/'.$row['image'].'"></a>';
-                            echo '<p class="collecterd_news_cat">'.implode(", ", $links).'</p>';
+                            echo '<p class="collecterd_news_cat ">'.implode(", ", $links).'</p>';
                           
                             echo '<div class="collected-News-desc"  >';
                                 echo '<p>'.$row['postDesc'].'</p>';

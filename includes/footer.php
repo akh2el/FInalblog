@@ -117,7 +117,14 @@
                              echo '<a class="nav-link" href="catpost.php?id='.$row['catSlug'].'" class="categories">समाज</a>';    
                         ?>
 					</li>
-					<li><a class="" href="#">राजनीति</a></li>
+					<li>
+					<?php
+                        $stmt = $db->query('SELECT catTitle, catSlug FROM sa_categories WHERE catTitle="राजनीति" ORDER BY catID DESC');
+                        $row = $stmt->fetch();
+                             echo '<a class="nav-link" href="catpost.php?id='.$row['catSlug'].'" class="categories">राजनीति</a>';
+                         
+                        ?>
+					</li>
 					<li>
 					<?php
                         $stmt = $db->query('SELECT catTitle, catSlug FROM sa_categories WHERE catTitle="अर्थ / व्यापार" ORDER BY catID DESC');

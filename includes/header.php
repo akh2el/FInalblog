@@ -22,6 +22,7 @@
 
     
     <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+    
 </head>
 <body>
 <div class="mr-container responsive">
@@ -164,6 +165,7 @@
                 </form>
                  </div>
     </div>
+    
 </nav>
 
 

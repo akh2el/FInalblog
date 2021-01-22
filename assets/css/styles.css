@@ -13,9 +13,25 @@
   }
 
 
+  a{
+    text-decoration: none;
+  }
+  
+  a:link {
+    text-decoration: none;
+  }
+
+  a:hover {
+    background-color: rgb(201, 201, 166);
+    font-size: 17px;
+  }
+  
 
 
 
+
+
+  
 nav a{
     color: white !important;
 }
@@ -135,7 +151,6 @@ nav li{
       width: 95%;
       height: 22px;
       text-align: left;
-      text-align: justify;
       font-family: var(--semibold); 
       
 
@@ -175,7 +190,7 @@ nav li{
 
   .lead-news-title-two{
     margin-top: 13px;
-    width: 95%;
+    width: 100%;
     height: 55px;
     overflow: hidden;
     height: 20px;
@@ -236,9 +251,12 @@ a{
 .bichar_scroll{
     height:400px;
     margin-top:20px;
-    overflow:scroll;
-    overflow-y:scroll;
     overflow-x:hidden;
+    overflow-y: hidden;
+}
+.bichar_scroll:hover {
+  overflow-y: scroll;
+  background-color: cornsilk;
 }
 .bichar_margin{
     margin-left: 5px; 
@@ -251,7 +269,7 @@ a{
     height:45px;
     width:110%; 
     font-size: 15px; 
-    text-align: justify; 
+    text-align: left; 
     overflow: hidden;
 }
 .bichar_col2{
@@ -407,35 +425,43 @@ footer ul{
     color: white !important;
  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-.footer_logoimg{
+ .footer_logoimg{
     width: 100px;
     height: 150px;
   }
 
+
+
 /* ****************category posts********* */
 
-.catpost-ima{
- height: 120px;
- width: 100%;
+.catpost_title{
+    margin-top: 10px;
+    width: 100%;
+    height: 55px;
+    text-align: justify; 
+    overflow: hidden;  
+}
+.catpost_img{
+    height: 120px; 
+    width: 100%;  
+}
+.catpost_desc{
+    width: 100%;
+    text-align: justify; 
+    height: 200px; 
+    overflow: hidden;
 }
 
+/* ********************ViewPost******************* */
 
+.viwepost_img{
+    width: 100%; 
+    height: 500px;
+}
 
-/* **********************anya-news************* */
-
-
-
-
+.viewpost_desc{
+    width: 100%; 
+    text-align: justify; 
+    overflow: hidden;
+}
 

@@ -1,4 +1,5 @@
 <?php require('includes/header.php'); 
+
 $stmt = $db->prepare('SELECT * FROM sa_posts WHERE postSlug = :postSlug');
 $stmt->execute(array(':postSlug' => $_GET['id']));
 $row = $stmt->fetch();
@@ -8,6 +9,7 @@ if($row['postID'] == ''){
     exit;
 
 }
+
  ?>
         
       <div class="container responsive">
@@ -30,10 +32,10 @@ if($row['postID'] == ''){
                           }
                   
                           echo '<div class="fafaone"><span> Category: </span>'.implode(", ", $links).'</div>';
-                          echo  '<img class="" style="width: 100%; height: 500px;" src="admin/uploads/'.$row['image'].'" width="100%">';
+                          echo  '<img class="viwepost_img" src="admin/uploads/'.$row['image'].'" width="100%">';
                           echo '<strong> Date:</span> '.date('jS M Y', strtotime($row['postDate'])).'</span></strong>';
                           echo'<div class="blog-content"';
-                            echo ' < p style="width: 100%; text-align: justify; overflow: hidden;">'.$row['postCont'].'</p>';
+                            echo ' < p class = "viewpost_desc">'.$row['postCont'].'</p>';
                             
                           echo('</div>');
                           
@@ -47,11 +49,10 @@ if($row['postID'] == ''){
 
 
 
-              // ******************Ads section **************
-                        echo '<div class="col-md-3" style = "width:100%;">';
+                        echo '<div class="col-md-3 ">';
 
 // ******************
-                       echo ' <div class="" style = "">';
+                       echo ' <div class="">';
                        echo ' <h4 class="text-center" style = "margin-top:80px; "><strong>मुखिय समचार</strong> </h4>';
                 
                           
@@ -70,7 +71,7 @@ if($row['postID'] == ''){
                                 
                                 while($row = $stmt->fetch()){
                         
-                               echo '<ul class = "mukhya_samachar" style="">'; 
+                               echo '<ul class = "" style="">'; 
                                     echo '<li style = "text-align: justify; margin-top:20px;"> <p class="mukhya_samachar_desc" ><strong><a style="" href="viewpost.php? id='.$row['postSlug'].'">'.$row['postTitle'].'</a></strong></p></li>';   
                                     
                                 echo'</ul>';
@@ -87,6 +88,7 @@ if($row['postID'] == ''){
                 echo '</div>'; 
                 
 // *************
+              // ******************Ads section **************
 
 
 
@@ -107,7 +109,7 @@ if($row['postID'] == ''){
                                   
                           while($row2 = $stmt2->fetch()){
                             echo '<div style = "margin-top:20px;">';
-                            echo '<a href="'.$row2['adsURL'].'" target="_blank"><img class = "" style = "width:100%; height:220px" src="admin/uploads/'.$row2['image'].'"></a>';
+                            echo '<a href="'.$row2['adsURL'].'" target="_blank"><img class = "sidebar_ads_img" src="admin/uploads/'.$row2['image'].'"></a>';
                             echo '</div>';
                             }
                           } catch(PDOException $e) {
