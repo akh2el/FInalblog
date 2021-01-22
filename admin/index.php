@@ -127,14 +127,14 @@ if(isset($_GET['delpost'])){
                         <div class="card p-30">
                             <div class="media">
                                 <div class="media-left meida media-middle">
-                                    <span><i class="fa fa-users f-s-40 color-warning"></i></span>
+                                    <span><i class="fa fa-users f-s-40 color-warning"></i></span>  
                                 </div>
                                 <div class="media-body media-text-right">
                                     <h2><?php    
-                                          $nRows = $db->query('select count(*) from sa_users')->fetchColumn(); 
+                                          $nRows = $db->query('select count(*) from sa_ads')->fetchColumn(); 
                                          echo $nRows;
                                         ?></h2>
-                                    <p class="m-b-0">Profiles</p>
+                                    <p class="m-b-0">Total advertisement</p>
                                 </div>
                             </div>
                         </div>

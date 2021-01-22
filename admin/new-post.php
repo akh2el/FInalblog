@@ -18,7 +18,7 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
     <!-- Style Sheet -->
            <?php include('includes/css.php');?> 
      <!-- Style Sheet -->
-    <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+    <!-- <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
      <script>
          tinymce.init({
               selector: "textarea",
@@ -29,7 +29,7 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
               ],
               toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
           });
-</script>
+</script> -->
 <style>
 /* Custom CSS */
 .mce-tinymce {
@@ -240,14 +240,14 @@ border-bottom: 0px !important;
                       <div class="form-group">
                         <div class="col-md-12">
                         <h4 class="card-title">Description</h4>
-                        <textarea name='postDesc' cols='60' rows='4'><?php if(isset($error)){ echo $_POST['postDesc'];}?></textarea>
+                        <textarea name='postDesc' cols='110' rows='4'><?php if(isset($error)){ echo $_POST['postDesc'];}?></textarea>
                         </div>
                      </div>
                             
                       <div class="form-group">
                         <div class="col-md-12">
                           <h4 class="card-title">Content</h4>
-                         <textarea name='postCont' cols='60' rows='10'><?php if(isset($error)){ echo $_POST['postCont'];}?></textarea>
+                         <textarea name='postCont' cols='110' rows='10'><?php if(isset($error)){ echo $_POST['postCont'];}?></textarea>
                          </div>
                      </div> 
 
