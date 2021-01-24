@@ -92,7 +92,7 @@
                     <!-- **************************************Ads section*************** -->
 
 
-                <div class = "sidebar_ads">
+                <div class = "">
 
                 <?php 
 			try {
