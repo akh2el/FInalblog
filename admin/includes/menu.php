@@ -47,22 +47,22 @@
                 <li class="nav-devider"></li>
                 <li class="nav-label">Home</li>
                 <li> <a class="" href='./' aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a></li>
-                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-sticky-note"></i><span class="hide-menu">Posts News</span></a>
+                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-sticky-note"></i><span class="hide-menu">Posts Images</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="posts.php">All News</a></li>
-                        <li><a href="new-post.php">Add News</a></li>
+                        <li><a href="posts.php">All Images</a></li>
+                        <li><a href="new-post.php">Add Images</a></li>
                     </ul>
                 </li>
 
-                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-sticky-note"></i><span class="hide-menu">Ads</span></a>
+                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-sticky-note"></i><span class="hide-menu">Project</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="ads.php">All Ads</a></li>
-                        <li><a href="new-ads.php">Add Ads</a></li>
+                        <li><a href="ads.php">All Project</a></li>
+                        <li><a href="new-ads.php">Add Project</a></li>
                     </ul>
                 </li>
-                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list-ul"></i><span class="hide-menu">Categories</span></a>
+                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list-ul"></i><span class="hide-menu">Services</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="categories.php">Categories</a></li>
+                        <li><a href="categories.php">Services</a></li>
                         <li><a href="add-category.php">Add New</a></li>
                     </ul>
                 </li>

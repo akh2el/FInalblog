@@ -14,135 +14,177 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
 
-    <title>Add Category</title>
-
-    <!-- Style Sheet -->
+    <title>Add New Services</title>
+    
            <?php include('includes/css.php');?> 
-     <!-- Style Sheet -->
-
+    
+<style>
+/* Custom CSS */
+.mce-tinymce {
+margin: 0;
+padding: 0;
+display: block;
+border: 1px solid #e3e3e3 !important;
+border-top-left-radius: 3px !important;
+border-top-right-radius: 3px !important;
+border-bottom: 0px !important;
+}
+</style>
 </head>
 
 <body class="fix-header fix-sidebar">
-   <div class="preloader">
+    <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
         </svg>
     </div>
         <!-- Main wrapper  -->
-      <div id="main-wrapper">
-          
+    <div id="main-wrapper">
         <!-- Menu -->
-           <?php include('includes/menu.php');?> 
+        <?php include('includes/menu.php');?> 
         <!-- End Menu -->
-        
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb -->
-
-            <div id="wrapper">
-	
-		
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Add Category</h3> </div>
+                    <h3 class="text-primary">Add Services</h3> 
+                </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="./">Home</a></li>
-                        <li class="breadcrumb-item active">Add Category</li>
+                        <li class="breadcrumb-item active">Add Services</li>
                     </ol>
                 </div>
             </div>
             <!-- End Bread crumb -->
+            
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <!-- Start Page Content -->
+                <?php
+                    //if form has been submitted process it
+                    if(isset($_POST['submit'])){
 
-                
-                <div class="row">
-				    <div class="col-lg-12">
-                        <div class="card">
+                        //collect form data
+                        extract($_POST);
 
-                            <?php
+                        //very basic validation
+                        if($sevTitle ==''){
+                            $error[] = 'Please enter the title.';
+                        }
 
-                            //if form has been submitted process it
-                            if(isset($_POST['submit'])){
+                        if(!isset($error)){
+ 
+                                $folder ="uploads/"; 
 
-                                //collect form data
-                                extract($_POST);
+                                $image = $_FILES['image']['name']; 
 
-                                //very basic validation
-                                if($catTitle ==''){
-                                    $error[] = 'Please enter the Category.';
+                                $path = $folder . $image ; 
+
+                                $target_file=$folder.basename($_FILES["image"]["name"]);
+
+
+                                 $imageFileType=pathinfo($target_file,PATHINFO_EXTENSION);
+
+
+                                $allowed=array('jpeg','png' ,'jpg'); $filename=$_FILES['image']['name']; 
+
+                                $ext=pathinfo($filename, PATHINFO_EXTENSION); if(!in_array($ext,$allowed) ) 
+
+                                { 
+
+                                 echo "Sorry, only JPG, JPEG, PNG & GIF  files are allowed.";
+
                                 }
+
+                                else{ 
+
+                                move_uploaded_file( $_FILES['image'] ['tmp_name'], $path); }
 
                                 if(!isset($error)){
 
-                                    try {
+                                try {
+                                
+                                //insert into database
+                                $stmt = $db->prepare('INSERT INTO sa_service (sevTitle,sevDate, image) VALUES (:sevTitle,  :sevDate, :image)') ;
+                                $stmt->execute(array(
+                                    ':sevTitle' => $sevTitle,
+                                    ':sevDate' => date('Y-m-d H:i:s'),
+                                    ':image' => $image
+                                ));
+                                $sevID = $db->lastInsertId();
 
-                                        $catSlug = slug($catTitle);
+                                header('Location: index.php?action=added');
+                                exit;
 
-                                        //insert into database
-                                        $stmt = $db->prepare('INSERT INTO sa_categories (catTitle,catSlug) VALUES (:catTitle, :catSlug)') ;
-                                        $stmt->execute(array(
-                                            ':catTitle' => $catTitle,
-                                            ':catSlug' => $catSlug
-                                        ));
-
-                                        //redirect to categories page
-                                        header('Location: categories.php?action=added');
-                                        exit;
-
-                                    } catch(PDOException $e) {
-                                        echo $e->getMessage();
-                                    }
-
-                                }
-
+                            } catch(PDOException $e) {
+                                echo $e->getMessage();
                             }
+                          }
 
-                            //check for any errors
-                            if(isset($error)){
-                                foreach($error as $error){
-                                    echo '<p class="error">'.$error.'</p>';
-                                }
-                            }
-                            ?>
+                        }
 
+                    }
+
+                    //check for any errors
+                    if(isset($error)){
+                        foreach($error as $error){
+                            echo '<p class="error">'.$error.'</p>';
                             
-                          
-                            
-                                            <div class="card-body">
-
-                                                 <form class="form-horizontal form-material" method='post'>
-                                                    <div class="form-group">
-                                                        <label class="col-md-12">Name</label>
-                                                        <div class="col-md-12">
-                                                            <input type="text" name='catTitle' value='<?php if(isset($error)){ echo $_POST['catTitle'];}?>' placeholder="Enter Category Name" class="form-control form-control-line">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
-                                                            <button type="submit" name='submit' value='Add User' class="btn btn-success">Add New Category</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-
-                                            </div>
-                         
+                        }
+                    }
+                    ?>
+                
+                <!-- /# row -->
+                <form class="form-horizontal form-material" action='' method='post' enctype="multipart/form-data">  
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="card">
+                            <div class="card-title">
+                                <h4>Add New Services</h4>
+                            </div>
+                        <div class="card-body">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                 <h4 class="card-title">Name</h4>
+                                <input type="text" placeholder="Enter Service title" class="form-control form-control-line" name='sevTitle' value='<?php if(isset($error)){ echo $_POST['sevTitle'];}?>'>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h4 class="card-title">Services</h4>
+                                <input type="file" name="image" accept=".jpg,.jpeg,.png"/> 
+                           </div>
+                        </div>      
                         </div>
                     </div>
                 </div>
-
-
-
-                </div>
-
-
+                    <!-- /# column --> 
+                <div class="col-lg-3">
+                    <div class="col-lg-12"> 
+                        <div class="card"> 
+                            <div class="card-title">
+                                <h4>Publish Services</h4>
+                            </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="submit" name='submit' value='Submit' class="btn btn-danger">Publish</button>
+                                </div>
+                            </div>
+                        </div>
+            </div>               
+        </div>
+    </div>
+                <!-- /# row -->
+                </form>
                 <!-- End PAge Content -->
             </div>
+            
             <!-- End Container fluid  -->
             <!-- footer -->
-            <footer class="footer"> Copyrights &copy; <?php echo date("Y"); ?> <a href="http://softaox.info/" target="_blank">softAOX.info</a>. All Rights Reserved.</footer>
+            <footer class="footer"> Copyrights &copy; <?php echo date("Y"); ?> <a href="https://aashatech.com/" target="_blank">AashaTech</a>. All Rights Reserved.</footer>
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->

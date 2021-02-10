@@ -79,84 +79,12 @@ if(isset($_GET['delpost'])){
                 </div>
             </div>
                 
-                
-           
-                
             <!-- End Bread crumb -->
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <!-- Start Page Content -->
-
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="card p-30">
-                            <div class="media">
-                                <div class="media-left meida media-middle">
-                                    <span><i class="fa fa-sticky-note f-s-40 color-primary"></i></span>
-                                </div>
-                                <div class="media-body media-text-right">
-                                    <h2>
-                                        <?php    
-                                          $nRows = $db->query('select count(*) from sa_posts')->fetchColumn(); 
-                                         echo $nRows;
-                                        ?>
-                                    </h2>
-                                    <p class="m-b-0">Total Posts</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card p-30">
-                            <div class="media">
-                                <div class="media-left meida media-middle">
-                                    <span><i class="fa fa-list-ul f-s-40 color-success"></i></span>
-                                </div>
-                                <div class="media-body media-text-right">
-                                    <h2><?php    
-                                          $nRows = $db->query('select count(*) from sa_categories')->fetchColumn(); 
-                                         echo $nRows;
-                                        ?>
-                                    </h2>
-                                    <p class="m-b-0">Total Categories</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card p-30">
-                            <div class="media">
-                                <div class="media-left meida media-middle">
-                                    <span><i class="fa fa-users f-s-40 color-warning"></i></span>  
-                                </div>
-                                <div class="media-body media-text-right">
-                                    <h2><?php    
-                                          $nRows = $db->query('select count(*) from sa_ads')->fetchColumn(); 
-                                         echo $nRows;
-                                        ?></h2>
-                                    <p class="m-b-0">Total advertisement</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card p-30">
-                            <div class="media">
-                                <div class="media-left meida media-middle">
-                                    <span><i class="fa fa-eye f-s-40 color-danger"></i></span>
-                                </div>
-                                <div class="media-body media-text-right">
-                                    <h2><a href="../" target="_blank" class="btn btn-dark btn-xs m-b-10 m-l-5">View Now</a></h2>
-                                    <p class="m-b-0">Website</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-
-                
-
-                <a href='new-post.php'> <button type="button" class="btn btn-dark m-b-10 m-l-5"><i class="fa fa-sticky-note"></i>  Add Post</button></a>
+                <a href='new-post.php'> <button type="button" class="btn btn-dark m-b-10 m-l-5"><i class="fa fa-sticky-note"></i>  Add Images</button></a>
 
 
 
@@ -166,7 +94,7 @@ if(isset($_GET['delpost'])){
 
 
                             <div class="card-title">
-                                <h4>Recent Post </h4>
+                                <h4>Recent Images </h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -184,15 +112,13 @@ if(isset($_GET['delpost'])){
                                             <tr>
                                                 <th>#</th>
                                                 <th>Title</th>
-                                                <th>Categories</th>
+                                                <th>    </th>
                                                 <th>Date</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
 
 									  <tbody>
-                                          
-                                          
                                     
                                     <?php
 										try {
@@ -208,7 +134,7 @@ if(isset($_GET['delpost'])){
                                           $stmt1 = $db->query('SELECT * FROM sa_categories where catID in (select catID from sa_post_categories where postID='. $row['postID'].')');
 										  while($row1 = $stmt1->fetch()){
 
-                                          echo $row1['catTitle'];
+                                          
 
                                             }
                                             echo '</td>';

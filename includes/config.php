@@ -6,7 +6,7 @@ session_start();
 define('db_host','localhost');
 define('db_user','root');
 define('db_pass','');
-define('db_name','my_blog');
+define('db_name','construction');
 
 
 $db = new PDO("mysql:host=".db_host.";dbname=".db_name, db_user, db_pass);

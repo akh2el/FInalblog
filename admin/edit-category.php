@@ -6,7 +6,6 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,15 +13,40 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
 
-    <title>Edit Category</title>
-    <!-- Style Sheet -->
+   <title>Edit Service</title>
+   
+     <!-- Style Sheet -->
            <?php include('includes/css.php');?> 
      <!-- Style Sheet -->
+    <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+              selector: "textarea",
+              plugins: [
+                  "advlist autolink lists link image charmap print preview anchor",
+                  "searchreplace visualblocks code fullscreen",
+                  "insertdatetime media table contextmenu paste"
+              ],
+              toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+          });
 
+  </script>
+    
 </head>
-
+<style>
+/* Custom CSS */
+.mce-tinymce {
+margin: 0;
+padding: 0;
+display: block;
+border: 1px solid #e3e3e3 !important;
+border-top-left-radius: 3px !important;
+border-top-right-radius: 3px !important;
+border-bottom: 0px !important;
+}
+</style>
 <body class="fix-header fix-sidebar">
-    <div class="preloader">
+     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
         </svg>
@@ -37,17 +61,13 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb -->
-
-            <div id="wrapper">
-	
-		
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Edit Category</h3> </div>
+                    <h3 class="text-primary">Edit Service</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="./">Home</a></li>
-                        <li class="breadcrumb-item active">Edit Category</li>
+                        <li class="breadcrumb-item active">Edit Service</li>
                     </ol>
                 </div>
             </div>
@@ -55,114 +75,200 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <!-- Start Page Content -->
+                 
+                <?php
 
+                    //if form has been submitted process it
+                    if(isset($_POST['submit'])){
+
+                        //collect form data
+                        extract($_POST);
+
+                        //very basic validation
+                        if($sevID ==''){
+                            $error[] = 'This post is missing a valid id!.';
+                        }
+
+                        if($sevTitle ==''){
+                            $error[] = 'Please enter the title.';
+                        }
+
+                      
+                        if(!isset($error)){
+
+                            try {
+
+                               // $postSlug = slug($postTitle);
+                                
+                                $folder ="uploads/"; 
+
+                                $image = $_FILES['image']['name']; 
+
+                                $path = $folder . $image ; 
+
+                                $target_file=$folder.basename($_FILES["image"]["name"]);
+
+
+                                 $imageFileType=pathinfo($target_file,PATHINFO_EXTENSION);
+
+
+                                $allowed=array('jpeg','png' ,'jpg','gif'); $filename=$_FILES['image']['name']; 
+
+                                $ext=pathinfo($filename, PATHINFO_EXTENSION); if(!in_array($ext,$allowed) ) 
+
+                                { 
+
+                                 echo "<span style='color:red; padding:10px;'>Please re-upload the image</span>";
+
+                                }
+
+                                else{ 
+
+                                move_uploaded_file( $_FILES['image'] ['tmp_name'], $path);
+
+                                //insert into database
+                                $stmt = $db->prepare('UPDATE sa_service SET sevTitle = :sevTitle, image = :image WHERE sevID = :sevID') ;
+                                $stmt->execute(array(
+                                    ':sevTitle' => $sevTitle,
+                                    ':sevID' => $sevID,
+                                    ':image' => $image
+                                ));
+
+                                
+                              
+                                    
+                                
+                                
+                                }
+
+                      
+            
+
+                            } catch(PDOException $e) {
+                                echo $e->getMessage();
+                            }
+                        }
+
+                    }
+
+                    ?>
+
+
+                    <?php
+                    //check for any errors
+                    if(isset($error)){
+                        foreach($error as $error){
+                            echo $error.'<br />';
+                        }
+                    }
+
+                        try {
+
+                            $stmt = $db->prepare('SELECT sevID, sevTitle, image FROM sa_service WHERE sevID = :sevID') ;
+                            $stmt->execute(array(':sevID' => $_GET['id']));
+                            $row = $stmt->fetch(); 
+
+                        } catch(PDOException $e) {
+                            echo $e->getMessage();
+                        }
+
+                    ?>
                 
-                <div class="row">
-				    <div class="col-lg-12">
-                        <div class="card">
+                <!-- /# row -->
+                 <form class="form-horizontal form-material"  enctype="multipart/form-data" action='' method='post'>  
+                <div class="row"> 
+                 
+                    <div class="col-lg-9">
+                     <div class="card">
+                        <div class="card-title">
+                            <h4>Edit Service</h4>
+                        </div>
+                        <div class="card-body">
+                            
+                            
+                            <input type='hidden' name='sevID' value='<?php echo $row['sevID'];?>'>
 
-                            <?php
+	                
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h4 class="card-title">Name</h4>
+                                <input type="text" placeholder="Enter Service title" class="form-control form-control-line" name='sevTitle' value='<?php echo $row['sevTitle'];?>'>
+                            </div>
+                        </div>
+                       
+                        
+                     <!-- <div class="form-group">
+                        <div class="col-md-12">
+                        <h4 class="card-title">Description</h4>
+                        <textarea name='postDesc' cols='60' rows='10'><?php// echo $row['postDesc'];?></textarea>
+                         </div>
+                     </div> 
+                    
+                    <div class="form-group">
+                        <div class="col-md-12">
+                        <h4 class="card-title">Content</h4>
+                        <textarea name='postCont' cols='60' rows='10'><?php //echo $row['postCont'];?></textarea>
+                        </div>
+                     </div> 
 
-                            //if form has been submitted process it
-                            if(isset($_POST['submit'])){
-
-                                //collect form data
-                                extract($_POST);
-
-                                //very basic validation
-                                if($catID ==''){
-                                    $error[] = 'This post is missing a valid id!.';
-                                }
-
-                                if($catTitle ==''){
-                                    $error[] = 'Please enter the title.';
-                                }
-
-                                if(!isset($error)){
-
-                                    try {
-
-                                        $catSlug = slug($catTitle);
-
-                                        //insert into database
-                                        $stmt = $db->prepare('UPDATE sa_categories SET catTitle = :catTitle, catSlug = :catSlug WHERE catID = :catID') ;
-                                        $stmt->execute(array(
-                                            ':catTitle' => $catTitle,
-                                            ':catSlug' => $catSlug,
-                                            ':catID' => $catID
-                                        ));
-
-                                        //redirect to index page
-                                        header('Location: categories.php?action=updated');
-                                        exit;
-
-                                    } catch(PDOException $e) {
-                                        echo $e->getMessage();
-                                    }
-
-                                }
-
-                            }
-
-                            ?>
-
-
-                            <?php
-                            //check for any errors
-                            if(isset($error)){
-                                foreach($error as $error){
-                                    echo $error.'<br />';
-                                }
-                            }
-
-                                try {
-
-                                    $stmt = $db->prepare('SELECT catID, catTitle FROM sa_categories WHERE catID = :catID') ;
-                                    $stmt->execute(array(':catID' => $_GET['id']));
-                                    $row = $stmt->fetch(); 
-
-                                } catch(PDOException $e) {
-                                    echo $e->getMessage();
-                                }
-
-                            ?>
-
-		        
-                                            <div class="card-body">
-
-                                                 <form class="form-horizontal form-material" method='post'>
-                                                     
-                                                     <input type='hidden' name='catID' value='<?php echo $row['catID'];?>'>
-                                                     
-                                                    <div class="form-group">
-                                                        <label class="col-md-12">Name</label>
-                                                        <div class="col-md-12">
-                                                            <input type="text" name='catTitle' value='<?php echo $row['catTitle'];?>' placeholder="Enter Category Name" class="form-control form-control-line">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
-                                                            <button type="submit" name='submit' value='Update' class="btn btn-danger">Update</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-
-                                            </div>
-                         
+                    <div class="form-group">
+                        <div class="col-md-12">
+                        <h4 class="card-title">Tags</h4>
+                        <input type='text' name='postTags' value='<?php //echo $row['postTags'];?>' style="width:400px;"></p>
+                        </div>
+                     </div> 
+                             -->
+                            
+                    <div class="form-group">
+                        <div class="col-md-12">
+                        <div class="preview_img">
+                         <img src="<?php echo 'uploads/'.$row['image']; ?>" width="150px">
+                         </div>
+                          <h4 class="card-title">Images</h4>
+                                <input type="file" name="image" accept=".jpg,.jpeg,.png"/> 
+                           </div>
+                   </div>    
+                            
+                            </div>
                         </div>
                     </div>
+                    <!-- /# column -->
+                    
+                    <div class="col-lg-3 custom-my-side">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            
+                            <div class="card-title">
+                                <h4>Update Service</h4>
+                            </div>
+                            <div class="card-body">
+                                
+                             <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <button type="submit" name='submit' value='Submit' class="btn btn-danger">Update</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                           
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-12">
+                   
+                    </div>
+                    
+                     </div>
+                    
+                    
                 </div>
-
-
-
-                </div>
-
-
+                <!-- /# row -->
+                </form>
                 <!-- End PAge Content -->
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
-            <footer class="footer"> Copyrights &copy; <?php echo date("Y"); ?> <a href="http://softaox.info/" target="_blank">softAOX.info</a>. All Rights Reserved.</footer>
+            <footer class="footer"> Copyrights &copy; <?php echo date("Y"); ?> <a href="http://aashatech.com/" target="_blank">Aasha tech</a>. All Rights Reserved.</footer>
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->

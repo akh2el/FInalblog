@@ -8,8 +8,8 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
 //show message from add / edit page
 if(isset($_GET['delads'])){ 
 
-	$stmt = $db->prepare('DELETE FROM sa_ads WHERE adsID = :adsID') ;
-	$stmt->execute(array(':adsID' => $_GET['delads']));
+	$stmt = $db->prepare('DELETE FROM sa_project WHERE proID = :proID') ;
+	$stmt->execute(array(':proID' => $_GET['delads']));
 
 	//delete post categories. 
 	$stmt = $db->prepare('DELETE FROM sa_ads_dis_ads WHERE adsID = :adsID');
@@ -30,7 +30,7 @@ if(isset($_GET['delads'])){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
 
-    <title>Ads</title>
+    <title>Project</title>
     
     <!-- Style Sheet -->
            <?php include('includes/css.php');?> 
@@ -70,11 +70,11 @@ if(isset($_GET['delads'])){
 		
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Ads</h3> </div>
+                    <h3 class="text-primary">Project</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="./">Home</a></li>
-                        <li class="breadcrumb-item active">Ads</li>
+                        <li class="breadcrumb-item active">Project</li>
                     </ol>
                 </div>
             </div>
@@ -90,7 +90,7 @@ if(isset($_GET['delads'])){
 
 
                             <div class="card-title">
-                                <h4>Recent ads </h4> <a href='new-ads.php'> <button type="button" class="btn btn-dark btn-xs m-b-10 m-l-5"><i class="fa fa-sticky-note"></i>  Add Ads</button></a>
+                                <h4>Recent Project</h4> <a href='new-ads.php'> <button type="button" class="btn btn-dark btn-xs m-b-10 m-l-5"><i class="fa fa-sticky-note"></i>  Add Project</button></a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -108,7 +108,6 @@ if(isset($_GET['delads'])){
                                             <tr>
                                                 <th>#</th>
                                                 <th>Title</th>
-                                                <th>Display Section</th>
                                                 <th>Date</th>
                                                 <th>Action</th>
                                             </tr>
@@ -119,24 +118,17 @@ if(isset($_GET['delads'])){
                                     <?php
 										try {
 
-											$stmt = $db->query('SELECT * FROM sa_ads ORDER BY adsID DESC');
+											$stmt = $db->query('SELECT * FROM sa_project ORDER BY proID DESC');
 											while($row = $stmt->fetch()){
 
                                             echo '<tr>';
 
-                                          echo '<td>'.$row['adsID'].'</td>';
-                                          echo '<td>'.$row['adsTitle'].'</td>';
-                                          echo '<td>';
-                                          $stmt1 = $db->query('SELECT * FROM sa_dis_ads where disID in (select disID from sa_ads_dis_ads where adsID='. $row['adsID'].')');
-										  while($row1 = $stmt1->fetch()){
-
-                                          echo $row1['disTitle'];
-
-                                            }
-                                            echo '</td>';
-                                          echo '<td>'.date('jS M Y', strtotime($row['adsDate'])).'</td>';
+                                          echo '<td>'.$row['proID'].'</td>';
+                                          echo '<td>'.$row['proTitle'].'</td>';
+                                         
+                                          echo '<td>'.date('jS M Y', strtotime($row['proDate'])).'</td>';
                                           ?>
-                                                <td><a href="edit-ads.php?id=<?php echo $row['adsID'];?>"><button type="button" class="btn btn-primary btn-xs btn-addon s-b-10 s-l-5"><i class="fa fa-edit"></i> Edit</button></a> | <a href="javascript:delads('<?php echo $row['adsID'];?>','<?php echo $row['adsTitle'];?>')"><button type="button" class="btn btn-danger btn-xs btn-addon s-b-10 s-l-5"><i class="fa fa-trash"></i> Delete</button></a></td>
+                                                <td><a href="edit-ads.php?id=<?php echo $row['proID'];?>"><button type="button" class="btn btn-primary btn-xs btn-addon s-b-10 s-l-5"><i class="fa fa-edit"></i> Edit</button></a> | <a href="javascript:delads('<?php echo $row['proID'];?>','<?php echo $row['proTitle'];?>')"><button type="button" class="btn btn-danger btn-xs btn-addon s-b-10 s-l-5"><i class="fa fa-trash"></i> Delete</button></a></td>
                                             
                                             <?php 
 												echo '</tr>';

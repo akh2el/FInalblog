@@ -1,196 +1,77 @@
 
 
-    
-<!-- *************************	Advertisement section   ************************ -->
-<div class = "container ads" style = "margin-bottom:20px">
+<footer  >
 
-<?php 
-			try {
-				// number of records to be displayed in a page ie. 3 in this section
-				$pages = new Paginator('1','p');
-				// select a table
-				$stmt = $db->query('SELECT postDate FROM sa_posts');
-
-				//pass number of records to
-				$pages->set_total($stmt->rowCount());
-                // sql query to fetch data from tabel
-				$stmt = $db->query('SELECT sa_ads.adsID, sa_ads.adsDate,sa_ads.adsURL, image 
-                  FROM sa_ads INNER JOIN sa_ads_dis_ads ON sa_ads.adsID = sa_ads_dis_ads.adsID
-									INNER JOIN sa_dis_ads ON sa_ads_dis_ads.disID = sa_dis_ads.disID 
-									WHERE sa_dis_ads.disTitle="6Above Footer" ORDER BY sa_ads.adsDate  DESC '.$pages->get_limit());
-                
-				while($row = $stmt->fetch()){
-		
-          echo '<a href="'.$row['adsURL'].'" target="_blank"><img class = "ads_img"  src="admin/uploads/'.$row['image'].'"></a>';
-					}
-				} catch(PDOException $e) {
-					echo $e->getMessage();
-				}
-		?>
-
-	  </div>
-
-<footer>
-	<div class="mr-container footer1">
-    	<div class="row ">
-            <div class="col-md-3">
-                 <div class="text-white  f1"> <!-- f1 class is for padding top and left : 30px and 60px  -->
-	<!-- Contact Address -->				
-				 <div class='row f2'> <!-- f2 class is for  padding-top: 10px -->
-					   <div class="col-4 text-center">
-					  		 <i class="fa fa-home"></i>
-						</div>
-						<div class="col-6">
-							<p class=''> थालनी ख़बर प्रा. लि. <br>कामनपा वडा नम्बर-३१, बानेश्वर,<br>काठमाडौँ, नेपाल </p>
-						</div>
-					</div>
-	<!-- contact Phone Number -->
-					<div class='row f2'> <!-- f2 class is for  padding-top: 10px -->
-						<div class="col-4 text-center">
-					   		<i class="fa fa-phone-square "></i>
-						</div>
-						<div class="col-8">
-						<p class=''>+९७७-०१-४४६९२०५</p> 
-						</div>
-			
-					</div>
-	<!-- contact Email -->
-					<div class='row f2'> <!-- f2 class is for  padding-top: 10px -->
-					<div class="col-4 text-center">
-						<i class="fa fa-envelope "></i>
-						</div>
-						<div class=" col-8">
-						<p class=''> thalanikhabar@gmail.com </p>
-						</div>
-						</div>
-	<!-- Website -->
-					<div class='row f2'> <!-- f2 class is for  padding-top: 10px -->
-					<div class="col-4 text-center">
-						<i class="fa fa-globe "></i>
-						</div>
-						<div class="col-8">
-						<p class=''>www.thalanikhabar.com</p>
-						</div>
-					</div>
-
-
-	<!-- Footer Social Links -->				
-				<div class='row'>
-					<div class="col-4 "></div> <!-- for gap -->
-						<div class="col-8">
-							<a class="logo" href="#"><i class="fa fa-facebook-square" style="font-size:36px;color:#39569c"></i></a>
-							<a class="logo" href="#"><i class="fa fa-linkedin-square" style="font-size:36px;color:#2867B2"></i></a>
-							<a class="logo" href="#"><i class="fa fa-twitter-square" style="font-size:36px;color:#1DA1F2"></i></a>
-							<a class="logo" href="#"><i class="fa fa-pinterest-square" style="font-size:36px;color:#E60023"></i></a>         
-						</div>
-					</div>
-
-				</div>
-            </div>
-				
-	<!-- facebook page implementation -->
-
-	<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v9.0" nonce="5CJAKDWz"></script>
-
-	<div class="col-md-6   text-center">
-		<!-- Facebook page start -->
-		<div class="fb-page" data-href="https://www.facebook.com/thalanikhabar" data-tabs="" data-width="400" data-height="270" data-small-header="false" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="false">
-		<blockquote cite="https://www.facebook.com/thalanikhabar" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/thalanikhabar">Thalani Khabar</a></blockquote>
-	</div>
-		<!-- facebook page end -->
-
-
-		<!-- about us section -->
-				<div class="fb"> <!-- fb class is for padding-top: 40px-->
-					     
-                </div>
-			</div>
-		<!-- Page Links-->
-			<div class="col-md-3 text-white text-center">
-				<img class="footer_logoimg" src="assets/images/logo.png" alt="Thalani Khabar logo"> <!-- Thalani Logo -->
-				<ul >
-					<li>
-					<?php
-                        $stmt = $db->query('SELECT catTitle, catSlug FROM sa_categories WHERE catTitle="समाज" ORDER BY catID DESC');
-                        $row = $stmt->fetch();
-                             echo '<a class="nav-link" href="catpost.php?id='.$row['catSlug'].'" class="categories">समाज</a>';    
-                        ?>
-					</li>
-					<li>
-					<?php
-                        $stmt = $db->query('SELECT catTitle, catSlug FROM sa_categories WHERE catTitle="राजनीति" ORDER BY catID DESC');
-                        $row = $stmt->fetch();
-                             echo '<a class="nav-link" href="catpost.php?id='.$row['catSlug'].'" class="categories">राजनीति</a>';
-                         
-                        ?>
-					</li>
-					<li>
-					<?php
-                        $stmt = $db->query('SELECT catTitle, catSlug FROM sa_categories WHERE catTitle="अर्थ / व्यापार" ORDER BY catID DESC');
-                        $row = $stmt->fetch();
-                             echo '<a class="nav-link" href="catpost.php?id='.$row['catSlug'].'" class="categories">अर्थ / व्यापार</a>';
-                         
-                        ?>
-					</li>
-					<li>
-					<?php
-                        $stmt = $db->query('SELECT catTitle, catSlug FROM sa_categories WHERE catTitle="अनौठो संसार" ORDER BY catID DESC');
-                        $row = $stmt->fetch();
-                             echo '<a class="nav-link" href="catpost.php?id='.$row['catSlug'].'" class="categories">अनौठो संसार</a>';
-                         
-                        ?>
-					</li>
-					<li>
-					<?php
-                        $stmt = $db->query('SELECT catTitle, catSlug FROM sa_categories WHERE catTitle="खेलकुद" ORDER BY catID DESC');
-                        $row = $stmt->fetch();
-                             echo '<a class="nav-link" href="catpost.php?id='.$row['catSlug'].'" class="categories">खेलकुद</a>';
-                         
-                        ?>
-					</li>
-					<li>
-					<?php
-                        $stmt = $db->query('SELECT catTitle, catSlug FROM sa_categories WHERE catTitle="मनोरञ्जन" ORDER BY catID DESC');
-                        $row = $stmt->fetch();
-                             echo '<a class="nav-link" href="catpost.php?id='.$row['catSlug'].'" class="categories">मनोरञ्जन</a>';
-                         
-                        ?>
-					</li>
-					<li> <?php
-                        $stmt = $db->query('SELECT catTitle, catSlug FROM sa_categories WHERE catTitle="क्राइम" ORDER BY catID DESC');
-                        $row = $stmt->fetch();
-                             echo '<a class="nav-link" href="catpost.php?id='.$row['catSlug'].'" class="categories">क्राइम</a>';
-                         
-                        ?></li>
-					<li>
-					<?php
-                        $stmt = $db->query('SELECT catTitle, catSlug FROM sa_categories WHERE catTitle="विचार" ORDER BY catID DESC');
-                        $row = $stmt->fetch();
-                             echo '<a class="nav-link" href="catpost.php?id='.$row['catSlug'].'" class="categories">विचार</a>';
-                         
-                        ?>
-					</li>
-				</ul> 
-			</div>
-        </div>  
+<div class="footer_bg_img" style="background-image: url('assets/images/footer.jpg');">
+  <div class="footer_div_size">
+    <div class="container text-center" style="padding-top: 10%; color: white;" >
+        <h3 class=" foleft wow animate__zoomIn text-center  " data-wow-duration="3s" data-wow-delay="0.5s"" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">We remain true to the same principles on which our company was founded over a ten years ago, providing superior service to our clients, 
+            putting safety first, creating opportunities for our people, delivering exceptional work.
+        </h3>
     </div>
-     
+ </div>
+ 
+<div class="mr-container"  style="background: rgba(43, 167, 230, 0.5);">
+ <div class="container column py-5">
+    <div class="row footer_row_margin foleft wow animate__zoomIn" data-wow-duration="2s" data-wow-delay="0.1s"">
+      <div class = "col-md-6 text-left">
+        <div><h4 class="footer_title" ><strong>US CONSTRUCTION Pvt.Ltd.</strong></h2></div>
+        <div class="footer_ul"> 
+        <ul class="list-unstyled" >
+                <li><h4><strong>Contact Us</strong></h4></li>
+                <li><h5><strong>Name: <span class="">Upendra Shrestha</span></strong></h5></li>
+                <li><h5><strong>Phone no: 9851125279</strong></h5></li>
+                <li><h5><strong>Address: Radhe Radhe,Kathmandu, Nepal</strong></h5></li>
+                <li><h5><strong>email: usconstruction2071@gmail.com</strong></h5></li>
+            
+          </ul>
+        </div>
+        </div>
+        <div class = "col-md-6 footer_map">
+          <div class="mapouter column">
+            <div class="gmap_canvas">
+              <iframe width="100%" height="200" id="gmap_canvas" src="https://maps.google.com/maps?q=banepa-10&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+              </iframe><br><style>.mapouter{position:relative;text-align:right;height:200px;width:100%;}</style>
+              <style>.gmap_canvas {overflow:hidden;background:none!important;height:200px;width:100%;}</style>
+            </div>
+          </div>
+        </div>
+        
+    
+     </div>
+    </div>
+    
+  <hr>
+  <div class="container" style="text-center">
+    <p>© 2021 US Contruction . All Rights Reserved.<span class="footer_design">Design by:<a href="https://www.aashatech.com/" target="_blank"> Aasha Tech Pvt.Ltd.</a></span></p>
+  </div>
+  </div>
+</div>
+	
 </footer>
 
 
-
-
-
-
-
-
-
-
-
+	<script src="assets/js/wow.min.js"></script>
+	<script>
+	new WOW().init();
+  </script>
+  
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="assets/jquery/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="assets/vinobox/venobox.min.js"></script>
+<script>
+    $(document).ready(function(){
+    $('.venobox').venobox({
+      closeColor: '#f4f4f4',
+      SpinColor: '#f4f4f4',
+      colorBackground:'#17191D',
+      overlayColor: 'rgba(23,25,29,0.8)'
+    }); 
+});
+</script>
 </body>
 </html>

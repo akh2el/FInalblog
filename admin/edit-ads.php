@@ -13,7 +13,7 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
 
-   <title>Edit Ads</title>
+   <title>Edit Peoject</title>
    
      <!-- Style Sheet -->
            <?php include('includes/css.php');?> 
@@ -63,11 +63,11 @@ border-bottom: 0px !important;
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Edit Ads</h3> </div>
+                    <h3 class="text-primary">Edit Project</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="./">Home</a></li>
-                        <li class="breadcrumb-item active">Edit Ads</li>
+                        <li class="breadcrumb-item active">Edit Project</li>
                     </ol>
                 </div>
             </div>
@@ -85,22 +85,15 @@ border-bottom: 0px !important;
                         extract($_POST);
 
                         //very basic validation
-                        if($adsID ==''){
+                        if($proID ==''){
                             $error[] = 'This post is missing a valid id!.';
                         }
 
-                        if($adsTitle ==''){
+                        if($proTitle ==''){
                             $error[] = 'Please enter the title.';
                         }
 
-                        // if($postDesc ==''){
-                        //     $error[] = 'Please enter the description.';
-                        // }
-
-                        // if($postCont ==''){
-                        //     $error[] = 'Please enter the content.';
-                        // }
-
+                      
                         if(!isset($error)){
 
                             try {
@@ -134,29 +127,20 @@ border-bottom: 0px !important;
                                 move_uploaded_file( $_FILES['image'] ['tmp_name'], $path);
 
                                 //insert into database
-                                $stmt = $db->prepare('UPDATE sa_ads SET adsTitle = :adsTitle,adsURL = :adsURL, image = :image WHERE adsID = :adsID') ;
+                                $stmt = $db->prepare('UPDATE sa_project SET proTitle = :proTitle, image = :image WHERE proID = :proID') ;
                                 $stmt->execute(array(
-                                    ':adsTitle' => $adsTitle,
-                                    ':adsID' => $adsID,
-                                    ':adsURL' => $adsURL,
+                                    ':proTitle' => $proTitle,
+                                    ':proID' => $proID,
                                     ':image' => $image
                                 ));
 
                                 //delete all items with the current postID
-                                $stmt = $db->prepare('DELETE FROM sa_ads_dis_ads WHERE adsID = :adsID');
-                                $stmt->execute(array(':adsID' => $adsID));
+                                // $stmt = $db->prepare('DELETE FROM sa_project WHERE proID = :proID');
+                                // $stmt->execute(array(':proID' => $proID));
 
-                                if(is_array($disID)){
-                                    foreach($_POST['disID'] as $disID){
-                                        $stmt = $db->prepare('INSERT INTO sa_ads_dis_ads (adsID,disID)VALUES(:adsID,:disID)');
-                                        $stmt->execute(array(
-                                            ':adsID' => $adsID,
-                                            ':disID' => $disID
-                                        ));
-                                    }
+                              
                                     
-                                    
-                                }
+                                
                                 
                                 }
 
@@ -183,8 +167,8 @@ border-bottom: 0px !important;
 
                         try {
 
-                            $stmt = $db->prepare('SELECT adsID, adsTitle, image FROM sa_ads WHERE adsID = :adsID') ;
-                            $stmt->execute(array(':adsID' => $_GET['id']));
+                            $stmt = $db->prepare('SELECT proID, proTitle, image FROM sa_project WHERE proID = :proID') ;
+                            $stmt->execute(array(':proID' => $_GET['id']));
                             $row = $stmt->fetch(); 
 
                         } catch(PDOException $e) {
@@ -200,26 +184,21 @@ border-bottom: 0px !important;
                     <div class="col-lg-9">
                      <div class="card">
                         <div class="card-title">
-                            <h4>Edit Ads</h4>
+                            <h4>Edit Project</h4>
                         </div>
                         <div class="card-body">
                             
                             
-                            <input type='hidden' name='adsID' value='<?php echo $row['adsID'];?>'>
+                            <input type='hidden' name='proID' value='<?php echo $row['proID'];?>'>
 
 	                
                         <div class="form-group">
                             <div class="col-md-12">
                                 <h4 class="card-title">Name</h4>
-                                <input type="text" placeholder="Enter ads title" class="form-control form-control-line" name='adsTitle' value='<?php echo $row['adsTitle'];?>'>
+                                <input type="text" placeholder="Enter Project title" class="form-control form-control-line" name='proTitle' value='<?php echo $row['proTitle'];?>'>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <h4 class="card-title">URL</h4>
-                                <input type="text" placeholder="Enter ads URL" class="form-control form-control-line" name='adsURL' value='<?php echo $row['adsURL'];?>'>
-                            </div>
-                        </div>
+                       
                         
                      <!-- <div class="form-group">
                         <div class="col-md-12">
@@ -263,7 +242,7 @@ border-bottom: 0px !important;
                         <div class="card">
                             
                             <div class="card-title">
-                                <h4>Update Ads</h4>
+                                <h4>Update Project</h4>
                             </div>
                             <div class="card-body">
                                 
@@ -279,41 +258,7 @@ border-bottom: 0px !important;
                     </div>
                     
                     <div class="col-lg-12">
-                    
-<!-- ******************************** -->
-
-<!-- *********************************************** -->
-                        <div class="card">
-                         
-                            <div class="card-title">
-                                <h4>Display Section</h4>
-                            </div>
-                            <div class="card-body">
-                           
-                                <?php
-
-                                $stmt2 = $db->query('SELECT disID, disTitle FROM sa_dis_ads ORDER BY disTitle');
-                                while($row2 = $stmt2->fetch()){
-
-                                    $stmt3 = $db->prepare('SELECT disID FROM sa_ads_dis_ads WHERE adsID = :adsID AND adsID = :adsID') ;
-                                    $stmt3->execute(array(':disID' => $row2['disID'], ':adsID' => $row['adsID']));
-                                    $row3 = $stmt3->fetch(); 
-
-                                    if($row3['disID'] == $row2['disID']){
-                                        $checked = 'checked=checked';
-                                    } else {
-                                        $checked = null;
-                                    }
-
-
-                                    echo "<label><input type='checkbox' name='disID[]' value='".$row2['disID']."' $checked> ".$row2['disTitle']."</label><br />";
-                                }
-
-                                ?>
-
-                                   
-                        </div>
-                        </div>
+                   
                     </div>
                     
                      </div>

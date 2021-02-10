@@ -8,8 +8,8 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
 //show message from add / edit page
 if(isset($_GET['delcat'])){ 
 
-	$stmt = $db->prepare('DELETE FROM sa_categories WHERE catID = :catID') ;
-	$stmt->execute(array(':catID' => $_GET['delcat']));
+	$stmt = $db->prepare('DELETE FROM sa_service WHERE sevID = :sevID') ;
+	$stmt->execute(array(':sevID' => $_GET['delcat']));
 
 	header('Location: categories.php?action=deleted');
 	exit;
@@ -26,7 +26,7 @@ if(isset($_GET['delcat'])){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
 
-    <title>Categories</title>
+    <title>Services</title>
    
     <!-- Style Sheet -->
            <?php include('includes/css.php');?> 
@@ -66,11 +66,11 @@ if(isset($_GET['delcat'])){
 		
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Categories</h3> </div>
+                    <h3 class="text-primary">Services</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="./">Home</a></li>
-                        <li class="breadcrumb-item active">Categories</li>
+                        <li class="breadcrumb-item active">Services</li>
                     </ol>
                 </div>
             </div>
@@ -86,7 +86,7 @@ if(isset($_GET['delcat'])){
 
 
                             <div class="card-title">
-                                <h4>Categories</h4> <a href='add-category.php'> <button type="button" class="btn btn-dark btn-sm m-b-10 m-l-5"><i class="fa fa-plus"></i> Add New Category</button></a>
+                                <h4>Services</h4> <a href='add-category.php'> <button type="button" class="btn btn-dark btn-sm m-b-10 m-l-5"><i class="fa fa-plus"></i> Add New Services</button></a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -113,14 +113,14 @@ if(isset($_GET['delcat'])){
                                         <?php
                                             try {
 
-                                                $stmt = $db->query('SELECT catID, catTitle, catSlug FROM sa_categories ORDER BY catTitle DESC');
+                                                $stmt = $db->query('SELECT sevID, sevTitle FROM sa_service ORDER BY sevID DESC');
                                                 while($row = $stmt->fetch()){
 
-                                                echo '<td>'.$row['catID'].'</td>';
-                                                echo '<td>'.$row['catTitle'].'</td>';
+                                                echo '<td>'.$row['sevID'].'</td>';
+                                                echo '<td>'.$row['sevTitle'].'</td>';
                                                 ?>
                                                 
-                                                <td><a href="edit-category.php?id=<?php echo $row['catID'];?>"><button type="button" class="btn btn-primary btn-xs btn-addon s-b-10 s-l-5"><i class="fa fa-edit"></i> Edit</button></a> | <a href="javascript:delcat('<?php echo $row['catID'];?>','<?php echo $row['catSlug'];?>')"><button type="button" class="btn btn-danger btn-xs btn-addon s-b-10 s-l-5"><i class="fa fa-trash"></i> Delete</button></a></td>
+                                                <td><a href="edit-category.php?id=<?php echo $row['sevID'];?>"><button type="button" class="btn btn-primary btn-xs btn-addon s-b-10 s-l-5"><i class="fa fa-edit"></i> Edit</button></a> | <a href="javascript:delcat('<?php echo $row['sevID'];?>',)"><button type="button" class="btn btn-danger btn-xs btn-addon s-b-10 s-l-5"><i class="fa fa-trash"></i> Delete</button></a></td>
                                             
                                             <?php 
 												echo '</tr>';
@@ -149,7 +149,7 @@ if(isset($_GET['delcat'])){
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
-            <footer class="footer"> Copyrights &copy; <?php echo date("Y"); ?> <a href="http://softaox.info/" target="_blank">softAOX.info</a>. All Rights Reserved.</footer>
+            <footer class="footer"> Copyrights &copy; <?php echo date("Y"); ?> <a href="http://softaox.info/" target="_blank">Aashatech.com</a>. All Rights Reserved.</footer>
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->

@@ -13,7 +13,7 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
 
-   <title>Edit Post</title>
+   <title>Edit Images</title>
    
      <!-- Style Sheet -->
            <?php include('includes/css.php');?> 
@@ -63,11 +63,11 @@ border-bottom: 0px !important;
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Edit Post</h3> </div>
+                    <h3 class="text-primary">Edit Images</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="./">Home</a></li>
-                        <li class="breadcrumb-item active">Edit Post</li>
+                        <li class="breadcrumb-item active">Edit Images</li>
                     </ol>
                 </div>
             </div>
@@ -93,19 +93,12 @@ border-bottom: 0px !important;
                             $error[] = 'Please enter the title.';
                         }
 
-                        if($postDesc ==''){
-                            $error[] = 'Please enter the description.';
-                        }
-
-                        if($postCont ==''){
-                            $error[] = 'Please enter the content.';
-                        }
-
+                      
                         if(!isset($error)){
 
                             try {
 
-                                $postSlug = slug($postTitle);
+                               
                                 
                                 $folder ="uploads/"; 
 
@@ -134,42 +127,16 @@ border-bottom: 0px !important;
                                 move_uploaded_file( $_FILES['image'] ['tmp_name'], $path);
 
                                 //insert into database
-                                $stmt = $db->prepare('UPDATE sa_posts SET postTitle = :postTitle, postSlug = :postSlug, postDesc = :postDesc, postCont = :postCont, postTags = :postTags, image = :image WHERE postID = :postID') ;
+                                $stmt = $db->prepare('UPDATE sa_posts SET postTitle = :postTitle, image = :image WHERE postID = :postID') ;
                                 $stmt->execute(array(
                                     ':postTitle' => $postTitle,
-                                    ':postSlug' => $postSlug,
-                                    ':postDesc' => $postDesc,
-                                    ':postCont' => $postCont,
+                                    
                                     ':postID' => $postID,
-                                    ':postTags' => $postTags,
                                     ':image' => $image
                                 ));
 
-                                //delete all items with the current postID
-                                $stmt = $db->prepare('DELETE FROM sa_post_categories WHERE postID = :postID');
-                                $stmt->execute(array(':postID' => $postID));
-
-                                if(is_array($catID)){
-                                    foreach($_POST['catID'] as $catID){
-                                        $stmt = $db->prepare('INSERT INTO sa_post_categories (postID,catID)VALUES(:postID,:catID)');
-                                        $stmt->execute(array(
-                                            ':postID' => $postID,
-                                            ':catID' => $catID
-                                        ));
-                                    }
-                                    if(is_array($secID)){
-                                        foreach($_POST['secID'] as $secID ){
-                                            $stmt2 = $db->prepare('INSERT INTO sa_post_section (postID,secID)VALUES(:postID,:secID)');
-                                            $stmt2->execute(array(
-                                                ':postID' => $postID,
-                                                ':secID' => $secID
-                                                
-                                            ));
-                                        }
-
-                                    }
-                                    
-                                }
+                            
+                                
                                 
                                 }
 
@@ -196,7 +163,7 @@ border-bottom: 0px !important;
 
                         try {
 
-                            $stmt = $db->prepare('SELECT postID, postTitle, postDesc, postCont, postTags, image FROM sa_posts WHERE postID = :postID') ;
+                            $stmt = $db->prepare('SELECT postID, postTitle,image FROM sa_posts WHERE postID = :postID') ;
                             $stmt->execute(array(':postID' => $_GET['id']));
                             $row = $stmt->fetch(); 
 
@@ -213,7 +180,7 @@ border-bottom: 0px !important;
                     <div class="col-lg-9">
                      <div class="card">
                         <div class="card-title">
-                            <h4>Edit Post</h4>
+                            <h4>Edit Images</h4>
                         </div>
                         <div class="card-body">
                             
@@ -227,28 +194,7 @@ border-bottom: 0px !important;
                                 <input type="text" placeholder="Enter post title" class="form-control form-control-line" name='postTitle' value='<?php echo $row['postTitle'];?>'>
                             </div>
                         </div>
-                        
-                     <div class="form-group">
-                        <div class="col-md-12">
-                        <h4 class="card-title">Description</h4>
-                        <textarea name='postDesc' cols='110' rows='10'><?php echo $row['postDesc'];?></textarea>
-                         </div>
-                     </div> 
                     
-                    <div class="form-group">
-                        <div class="col-md-12">
-                        <h4 class="card-title">Content</h4>
-                        <textarea name='postCont' cols='110' rows='10'><?php echo $row['postCont'];?></textarea>
-                        </div>
-                     </div> 
-
-                    <div class="form-group">
-                        <div class="col-md-12">
-                        <h4 class="card-title">Tags</h4>
-                        <input type='text' name='postTags' value='<?php echo $row['postTags'];?>' style="width:400px;"></p>
-                        </div>
-                     </div> 
-                            
                             
                     <div class="form-group">
                         <div class="col-md-12">
@@ -285,77 +231,7 @@ border-bottom: 0px !important;
                         </div>
                     </div>
                     
-                    <div class="col-lg-12">
-                    
-<!-- ******************************** -->
-
-<div class="card">
-                            
-                            <div class="card-title">
-                               <h4>Section</h4>
-                           </div>
-                           <div class="card-body">
-                               
-                               
-                           <?php 
-
-               $stmt3 = $db->query('SELECT secID, secTitle FROM sa_Section ORDER BY secTitle');
-               while($row3 = $stmt3->fetch()){
-         
-                 if(isset($_POST['secID'])){
-         
-                   if(in_array($row3['secID'], $_POST['secID'])){
-                      $checked="checked='checked'";
-                   }else{
-                      $checked = null;
-                   }
-                 }
-                echo "<label><input type='checkbox' name='secID[]' value='".$row3['secID']."'> ".$row3['secTitle']."</label><br/>";
-
-
-                                   
-               }
-         
-               ?>
-
-                               
-                       </div>
-                       </div>
-
-
-<!-- *********************************************** -->
-                        <div class="card">
-                         
-                            <div class="card-title">
-                                <h4>Categories</h4>
-                            </div>
-                            <div class="card-body">
-                           
-                                <?php
-
-                                $stmt2 = $db->query('SELECT catID, catTitle FROM sa_categories ORDER BY catTitle');
-                                while($row2 = $stmt2->fetch()){
-
-                                    $stmt3 = $db->prepare('SELECT catID FROM sa_post_categories WHERE catID = :catID AND postID = :postID') ;
-                                    $stmt3->execute(array(':catID' => $row2['catID'], ':postID' => $row['postID']));
-                                    $row3 = $stmt3->fetch(); 
-
-                                    if($row3['catID'] == $row2['catID']){
-                                        $checked = 'checked=checked';
-                                    } else {
-                                        $checked = null;
-                                    }
-
-
-                                    echo "<label><input type='checkbox' name='catID[]' value='".$row2['catID']."' $checked> ".$row2['catTitle']."</label><br />";
-                                }
-
-                                ?>
-
-                                   
-                        </div>
-                        </div>
-                    </div>
+                   
                     
                      </div>
                     
@@ -367,7 +243,7 @@ border-bottom: 0px !important;
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
-            <footer class="footer"> Copyrights &copy; <?php echo date("Y"); ?> <a href="http://softaox.info/" target="_blank">softAOX.info</a>. All Rights Reserved.</footer>
+            <footer class="footer"> Copyrights &copy; <?php echo date("Y"); ?> <a href="http://aashatech.com/" target="_blank">AashaTech</a>. All Rights Reserved.</footer>
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->
