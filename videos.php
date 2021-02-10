@@ -13,7 +13,6 @@
 
 <section id="about" style="background-image: linear-gradient(to top, #537895 0%, #09203f 100%);">
 
-
 <section class="containt_section">
     <div class="container">
         <div class="row video_content_row">
