@@ -19,7 +19,7 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
            <?php include('includes/css.php');?> 
      <!-- Style Sheet -->
     <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
-    <script>
+    <!-- <script>
         tinymce.init({
               selector: "textarea",
               plugins: [
@@ -30,7 +30,7 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
               toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
           });
 
-  </script>
+  </script> -->
     
 </head>
 <style>
@@ -92,13 +92,16 @@ border-bottom: 0px !important;
                         if($proTitle ==''){
                             $error[] = 'Please enter the title.';
                         }
+                        if($proDesc ==''){
+                            $error[] = 'Please enter the Desc.';
+                        }
 
                       
                         if(!isset($error)){
 
                             try {
 
-                               // $postSlug = slug($postTitle);
+                               $proSlug = slug($proDesc);
                                 
                                 $folder ="uploads/"; 
 
@@ -127,9 +130,11 @@ border-bottom: 0px !important;
                                 move_uploaded_file( $_FILES['image'] ['tmp_name'], $path);
 
                                 //insert into database
-                                $stmt = $db->prepare('UPDATE sa_project SET proTitle = :proTitle, image = :image WHERE proID = :proID') ;
+                                $stmt = $db->prepare('UPDATE sa_project SET proTitle = :proTitle, proDesc = :proDesc, proSlug = :proSlug, image = :image WHERE proID = :proID') ;
                                 $stmt->execute(array(
                                     ':proTitle' => $proTitle,
+                                    ':proDesc' => $proDesc,
+                                    ':proSlug' => $proSlug,
                                     ':proID' => $proID,
                                     ':image' => $image
                                 ));
@@ -167,7 +172,7 @@ border-bottom: 0px !important;
 
                         try {
 
-                            $stmt = $db->prepare('SELECT proID, proTitle, image FROM sa_project WHERE proID = :proID') ;
+                            $stmt = $db->prepare('SELECT proID, proTitle, proDesc, image FROM sa_project WHERE proID = :proID') ;
                             $stmt->execute(array(':proID' => $_GET['id']));
                             $row = $stmt->fetch(); 
 
@@ -199,14 +204,19 @@ border-bottom: 0px !important;
                             </div>
                         </div>
                        
-                        
-                     <!-- <div class="form-group">
+                        <div class="form-group">
                         <div class="col-md-12">
                         <h4 class="card-title">Description</h4>
-                        <textarea name='postDesc' cols='60' rows='10'><?php// echo $row['postDesc'];?></textarea>
+                        <textarea name='postDesc' cols='98' rows='10'><?php echo $row['proDesc'];?></textarea>
                          </div>
                      </div> 
-                    
+                      <!-- <div class="form-group">
+                        <div class="col-md-12">
+                        <h4 class="card-title">Description</h4>
+                        <input name='proDesc' cols='60' rows='10'><?php echo $row['proDesc'];?></input>
+                         </div>
+                     </div>  -->
+                    <!--
                     <div class="form-group">
                         <div class="col-md-12">
                         <h4 class="card-title">Content</h4>

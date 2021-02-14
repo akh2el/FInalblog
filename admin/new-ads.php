@@ -73,8 +73,13 @@ border-bottom: 0px !important;
                         if($proTitle ==''){
                             $error[] = 'Please enter the title.';
                         }
+                        if($proDesc ==''){
+                            $error[] = 'Please enter the description.';
+                        }
 
                         if(!isset($error)){
+
+                                $proSlug = slug($proDesc);
  
                                 $folder ="uploads/"; 
 
@@ -107,9 +112,11 @@ border-bottom: 0px !important;
                                 try {
                                 
                                 //insert into database
-                                $stmt = $db->prepare('INSERT INTO sa_project (proTitle,proDate, image) VALUES (:proTitle,  :proDate, :image)') ;
+                                $stmt = $db->prepare('INSERT INTO sa_project (proTitle,proDesc,proSlug,proDate, image) VALUES (:proTitle,:proDesc,:proSlug,:proDate, :image)') ;
                                 $stmt->execute(array(
                                     ':proTitle' => $proTitle,
+                                    ':proDesc' => $proDesc,
+                                    ':proSlug' => $proSlug,
                                     ':proDate' => date('Y-m-d H:i:s'),
                                     ':image' => $image
                                 ));
@@ -149,6 +156,12 @@ border-bottom: 0px !important;
                             <div class="col-md-12">
                                  <h4 class="card-title">Name</h4>
                                 <input type="text" placeholder="Enter project title" class="form-control form-control-line" name='proTitle' value='<?php if(isset($error)){ echo $_POST['proTitle'];}?>'>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                 <h4 class="card-title">Description</h4>
+                                <input type="text"  placeholder="Enter project Description" class="form-control form-control-line" name='proDesc' value='<?php if(isset($error)){ echo $_POST['proDesc'];}?>'>
                             </div>
                         </div>
                         <div class="form-group">

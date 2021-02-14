@@ -1,7 +1,6 @@
 
 
-<footer  >
-
+<footer>
 <div class="footer_bg_img" style="background-image: url('assets/images/footer.jpg');">
   <div class="footer_div_size">
     <div class="container text-center" style="padding-top: 10%; color: white;" >
@@ -23,7 +22,6 @@
                 <li><h5><strong>Phone no: 9851125279</strong></h5></li>
                 <li><h5><strong>Address: Radhe Radhe,Kathmandu, Nepal</strong></h5></li>
                 <li><h5><strong>email: usconstruction2071@gmail.com</strong></h5></li>
-            
           </ul>
         </div>
         </div>
@@ -73,5 +71,29 @@
     }); 
 });
 </script>
+
+
+
+<!-- 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script> -->
+<script>
+
+    $(document).ready(function(){
+        $('.card').on('mouseenter',function(e){
+            x = e.pageX - $(this).offset().left;
+            // y = e.pageY - $(this).offset().top
+            $(this).find('span').css({top:y, top:x})
+        })
+        $('.card').on('mouseenter',function(e){
+            x = e.pageX - $(this).offset().left;
+            // y = e.pageY - $(this).offset().top;
+            $(this).find('span').css({top:y, top:x})
+        })
+    })
+</script>
+
+
+
+
 </body>
 </html>

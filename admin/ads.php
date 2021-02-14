@@ -12,8 +12,8 @@ if(isset($_GET['delads'])){
 	$stmt->execute(array(':proID' => $_GET['delads']));
 
 	//delete post categories. 
-	$stmt = $db->prepare('DELETE FROM sa_ads_dis_ads WHERE adsID = :adsID');
-	$stmt->execute(array(':adsID' => $_GET['delads']));
+	$stmt = $db->prepare('DELETE FROM sa_project WHERE proID = :proID');
+	$stmt->execute(array(':proID' => $_GET['delads']));
 
 	header('Location: ads.php?action=deleted');
 	exit;

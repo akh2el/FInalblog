@@ -1,6 +1,5 @@
 <?php include ('includes/header.php');?>
 
-
  <section>                 <!--  *********************Banner section Start************** -->
     <div class="mr-container service_banner" style="background-image: url('assets/images/g111.jpg');" >
         <div class="container">
@@ -34,22 +33,29 @@
 				//pass number of records to
 				$pages->set_total($stmt->rowCount());
                 // sql query to fetch data from tabel
-				$stmt = $db->query('SELECT sa_service.sevID, sa_service.sevTitle, sa_service.sevDate,image 
+				$stmt = $db->query('SELECT sa_service.sevID, sa_service.sevTitle, sa_service.sevDesc, sa_service.sevDate,image 
                                     FROM sa_service  ORDER BY sa_service.sevDate  DESC '.$pages->get_limit());
                 
 				while($row = $stmt->fetch()){
 
 
-                // echo '<div class="row service_dis_row">'; 
-                    echo '<div class="col-md-4 service_dis_border product wow animate__zoomIn" data-wow-duration="1.5s" data-wow-delay="0.5s">';
-                        // echo<img src="assets/images/sand.jpg" width="100%" height="220px" style="margin-top: 15px;">
-                        echo '<img class="service_dis_img" src="admin/uploads/'.$row['image'].'">';
-                        echo '<div class="service_name">'; 
-                        echo '<h5 class="text-center service_name_dis"  ><strong>'.$row['sevTitle'].'</strong></h5>';
-                      
-                    echo ' </div>';
-                echo ' </div>';
-                
+                    echo '<div class="service_dis_row">';
+                        echo '<div class="col-md-4  wow animate__zoomIn" data-wow-duration="1s" data-wow-delay="0.2s" style="border-radius: 5px;">';
+                            echo '<div class = "cards">';
+                                    echo '<span></span>';
+                                    echo '<div class="imgBx"><img class="project_dis_img" src="admin/uploads/'.$row['image'].'"></div>';
+                                    echo '<div class = "content">';
+                                        echo '<div>';
+                                            echo '<h5 class="" style = " margin-left: 20px;"><strong>'.$row['sevTitle'].'</strong></h5>';
+                                            echo '<div>';
+                                                echo '<p class="" style = " margin-left: 10px; padding: 10px; font-family: monospace; overflow: hidden;">'.$row['sevDesc'].'</p>';
+                                            echo '</div>';    
+                                        echo '</div>';
+                                    echo '</div>';    
+                            echo '</div>';
+                        echo '</div>';
+                    echo '</div>';
+ 
             }
         } catch(PDOException $e) {
             echo $e->getMessage();
@@ -60,6 +66,7 @@
 </section>
                                                     <!-- END -->
 
+                                                  
 
  <?php include ('includes/footer.php'); ?>  <!-- footer -->
 

@@ -72,6 +72,8 @@ border-bottom: 0px !important;
                         //very basic validation
                         if($sevTitle ==''){
                             $error[] = 'Please enter the title.';
+                        }if($sevDesc ==''){
+                            $error[] = 'Please enter the Description.';
                         }
 
                         if(!isset($error)){
@@ -107,9 +109,10 @@ border-bottom: 0px !important;
                                 try {
                                 
                                 //insert into database
-                                $stmt = $db->prepare('INSERT INTO sa_service (sevTitle,sevDate, image) VALUES (:sevTitle,  :sevDate, :image)') ;
+                                $stmt = $db->prepare('INSERT INTO sa_service (sevTitle,sevDesc,sevDate, image) VALUES (:sevTitle, :sevDesc,  :sevDate, :image)') ;
                                 $stmt->execute(array(
                                     ':sevTitle' => $sevTitle,
+                                    ':sevDesc' => $sevDesc,
                                     ':sevDate' => date('Y-m-d H:i:s'),
                                     ':image' => $image
                                 ));
@@ -147,8 +150,14 @@ border-bottom: 0px !important;
                         <div class="card-body">
                         <div class="form-group">
                             <div class="col-md-12">
-                                 <h4 class="card-title">Name</h4>
+                                 <h4 class="card-title">Service Title</h4>
                                 <input type="text" placeholder="Enter Service title" class="form-control form-control-line" name='sevTitle' value='<?php if(isset($error)){ echo $_POST['sevTitle'];}?>'>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                 <h4 class="card-title">Description</h4>
+                                <input type="text" placeholder="Enter Service Description" class="form-control form-control-line" name='sevDesc' value='<?php if(isset($error)){ echo $_POST['sevDesc'];}?>'>
                             </div>
                         </div>
                         <div class="form-group">

@@ -41,13 +41,13 @@
 	<div class="container">
         <h4 style="text-align: center;"> Our Team</h4>
         <div class="row about_team_row">
-            <div class="col-md-4 product wow fadeInLeft text-center" data-wow-duration="1s" data-wow-delay="0.2s" style="border-radius: 5px;">
+            <div class="col-md-4  wow fadeInLeft text-center" data-wow-duration="1s" data-wow-delay="0.2s" style="border-radius: 5px;">
                     <img class="about_team_img" src="assets/images/upendra.png">
                     <p class="size"> Upendra Shrestha</p>
                     <p class="price"> Post: Chairman</p>
                     <p class="title">mobile no: 9851125279</p>
             </div>
-            <div class="col-md-4 product wow fadeInDown text-center" data-wow-duration="1s" data-wow-delay="0.2s" style="border-radius: 5px;">
+            <div class="col-md-4  wow fadeInDown text-center" data-wow-duration="1s" data-wow-delay="0.2s" style="border-radius: 5px;">
                 
                 <img class="about_team_img" src="assets/images/ramesh.png">
                 <p class="size"> Ramesh Humagain</p>
@@ -55,7 +55,7 @@
                 <p class="title">mobile no: 9861387777</p>
             
             </div>
-            <div class="col-md-4 product wow fadeInRight text-center" data-wow-duration="1s" data-wow-delay="0.2s" style="border-radius: 5px;" >     
+            <div class="col-md-4  wow fadeInRight text-center" data-wow-duration="1s" data-wow-delay="0.2s" style="border-radius: 5px;" >     
                 <img class="about_team_img" src="assets/images/sushil.png">
                 <p class="size"> Sushil Ghimire </p>
                 <p class="price"> Post: Accountant </p>
@@ -63,21 +63,21 @@
             </div>
         </div>
         <div class="row about_team_row">
-            <div class="col-md-4 product wow fadeInLeft text-center" data-wow-duration="1s" data-wow-delay="0.2s">
+            <div class="col-md-4  wow fadeInLeft text-center" data-wow-duration="1s" data-wow-delay="0.2s">
                 
                     <img class="about_team_img" src="assets/images/swesha.png">
                     <p class="size"> Swesha Thapa</p>
                     <p class="price"> Post: Recepsonist</p>
                 
             </div>
-            <div class="col-md-4 product wow fadeInUp text-center" data-wow-duration="1s" data-wow-delay="0.2s">
+            <div class="col-md-4  wow fadeInUp text-center" data-wow-duration="1s" data-wow-delay="0.2s">
                 
                 <img class="about_team_img" src="assets/images/anita.png">
                 <p class="size"> Anita Karki</p>
                 <p class="price"> Post: Office Girl</p>
             
             </div>
-            <div class="col-md-4 product wow fadeInRight text-center" data-wow-duration="1s" data-wow-delay="0.2s">     
+            <div class="col-md-4  wow fadeInRight text-center" data-wow-duration="1s" data-wow-delay="0.2s">     
                 <img class="about_team_img" src="assets/images/name.JPG">
                 <p class="size"></p>
                 <p class="price"> Post: Halper</p>

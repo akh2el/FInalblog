@@ -92,6 +92,9 @@ border-bottom: 0px !important;
                         if($sevTitle ==''){
                             $error[] = 'Please enter the title.';
                         }
+                        if($sevDesc ==''){
+                            $error[] = 'Please enter the Description.';
+                        }
 
                       
                         if(!isset($error)){
@@ -127,9 +130,10 @@ border-bottom: 0px !important;
                                 move_uploaded_file( $_FILES['image'] ['tmp_name'], $path);
 
                                 //insert into database
-                                $stmt = $db->prepare('UPDATE sa_service SET sevTitle = :sevTitle, image = :image WHERE sevID = :sevID') ;
+                                $stmt = $db->prepare('UPDATE sa_service SET sevTitle = :sevTitle, sevDesc = :sevDesc, image = :image WHERE sevID = :sevID') ;
                                 $stmt->execute(array(
                                     ':sevTitle' => $sevTitle,
+                                    ':sevDesc'=> $sevDesc,
                                     ':sevID' => $sevID,
                                     ':image' => $image
                                 ));
@@ -164,7 +168,7 @@ border-bottom: 0px !important;
 
                         try {
 
-                            $stmt = $db->prepare('SELECT sevID, sevTitle, image FROM sa_service WHERE sevID = :sevID') ;
+                            $stmt = $db->prepare('SELECT sevID, sevTitle,sevDesc, image FROM sa_service WHERE sevID = :sevID') ;
                             $stmt->execute(array(':sevID' => $_GET['id']));
                             $row = $stmt->fetch(); 
 
@@ -193,6 +197,12 @@ border-bottom: 0px !important;
                             <div class="col-md-12">
                                 <h4 class="card-title">Name</h4>
                                 <input type="text" placeholder="Enter Service title" class="form-control form-control-line" name='sevTitle' value='<?php echo $row['sevTitle'];?>'>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h4 class="card-title">Description</h4>
+                                <input type="text" placeholder="Enter Service title" class="form-control form-control-line" name='sevDesc' value='<?php echo $row['sevDesc'];?>'>
                             </div>
                         </div>
                        

@@ -26,35 +26,37 @@
         <?php 
 			try {
 				// number of records to be displayed in a page ie. 3 in this section
-				$pages = new Paginator('100','p');
+				$pages = new Paginator('1000','p');
 				// select a table
 				$stmt = $db->query('SELECT proDate FROM sa_project');
 
 				//pass number of records to
 				$pages->set_total($stmt->rowCount());
                 // sql query to fetch data from tabel
-				$stmt = $db->query('SELECT sa_project.proID, sa_project.proTitle, sa_project.proDate,image 
+				$stmt = $db->query('SELECT sa_project.proID, sa_project.proTitle,sa_project.proDesc, sa_project.proSlug, sa_project.proDate,image 
                                     FROM sa_project  ORDER BY sa_project.proDate  DESC '.$pages->get_limit());
                 
 				while($row = $stmt->fetch()){
 
 
-                // echo '<div class="row" style="margin-top: 20px;text-align: justify;">'; 
-                    echo '<div class="col-md-4 product wow animate__zoomIn" data-wow-duration="3s" data-wow-delay="0.5s" style="border-radius: 5px;">';
-                        // echo<img src="assets/images/sand.jpg" width="100%" height="220px" style="margin-top: 15px;">
-                        echo '<img class="project_dis_img" src="admin/uploads/'.$row['image'].'">';
-                            // <h3 class="text-center" style="background-color: rgb(220, 194, 128);"><strong>Sand</strong> </h3> 
-                        echo '<h5 class="text-center project_dis_title"><strong>'.$row['proTitle'].'</strong></h5>';
-                    echo ' </div>';
-                // echo ' </div>';
+                    echo '<div class="service_dis_row">';
+                    echo '<div class="col-md-4  wow animate__zoomIn" data-wow-duration="1s" data-wow-delay="0.2s" style="border-radius: 5px; padding: 15px;">';
+                    echo '<div class="product" >';
+                    echo '<a class="venobox" data-vbtype="iframe" href="viewpost.php? id='.$row['proSlug'].'"><img class="project_dis_img" src="admin/uploads/'.$row['image'].'"></a>';
+                    echo '<h5 class="text-center" style="background: blanchedalmond; padding: 5px;margin-top: 0px;"><strong>'.$row['proTitle'].'</strong></h5>';
+                        echo '</div>';
+                    echo '</div>';
+                echo '</div>';
                 
             }
         } catch(PDOException $e) {
             echo $e->getMessage();
         }
-        ?>
         
+        ?>
+   <!-- <a class="venobox" data-vbtype="iframe" href="viewpost.php">iFrame</a>  -->
     </div>
+    
 </section>	
                             <!-- END -->
 
